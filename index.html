@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Stotras · Japa108 integration plan</title>
+<title>Chants under Mantras · Japa108 plan v4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Noto+Serif+Tamil:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold:#eebf33;--saffron:#FF8E00;--tab-active:#ff8124;--tab-inactive:#818486;
-    --orange-1:#ff6c00;--orange-2:#F1A22C;--brown-1:#bc7922;--brown-2:#e2a729;
+    --saffron:#FF8E00;--saffron-dim:#FFC289;--gold:#eebf33;
+    --orange-1:#ff6c00;--orange-2:#F1A22C;
+    --brown-1:#bc7922;--brown-2:#e2a729;
     --cream-bg:#FFF6E3;--cream-card:#fffcf2;--page-bg:#f9f6f1;
-    --divider:#E3E3E3;--ink-dark:#343333;--ink-med:#5d5d5d;--ink-light:#939393;
+    --divider:#DEDEDE;--divider-soft:#E3E3E3;--seg-inactive:#D9D9D9;
+    --ink-dark:#1a1a1a;--ink-med:#5d5d5d;--ink-light:#939393;
+    --ink-40:rgba(0,0,0,0.4);
     --white:#ffffff;--ok:#16a34a;--chant-dark:#1a0f00;
   }
   * { box-sizing: border-box; }
@@ -26,7 +29,8 @@
     color: var(--ink-dark); min-height: 100vh; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  header { padding: 56px 24px 24px; text-align: center; max-width: 860px; margin: 0 auto; }
+
+  header { padding: 56px 24px 24px; text-align: center; max-width: 880px; margin: 0 auto; }
   header .eyebrow {
     display: inline-block; font-size: 11px; font-weight: 600;
     letter-spacing: 0.2em; text-transform: uppercase; color: var(--saffron);
@@ -38,7 +42,7 @@
     background: linear-gradient(90deg, var(--orange-1), var(--orange-2));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  header .sub { color: var(--ink-med); font-size: 17px; max-width: 680px; margin: 0 auto 20px; }
+  header .sub { color: var(--ink-med); font-size: 17px; max-width: 700px; margin: 0 auto 20px; }
   header .stats {
     display: inline-flex; gap: 22px; flex-wrap: wrap; justify-content: center;
     margin-top: 18px; padding: 12px 20px; background: var(--white);
@@ -62,42 +66,26 @@
 
   main { padding: 8px 16px 80px; max-width: 1400px; margin: 0 auto; }
 
-  /* ============== VERDICT SECTION ============== */
-  .verdict {
+  /* =========== PLAN AT A GLANCE =========== */
+  .plan {
     margin: 40px auto 48px; max-width: 980px;
-    padding: 32px 28px;
+    padding: 30px 28px;
     background: linear-gradient(165deg, var(--white) 0%, var(--cream-bg) 100%);
-    border: 1px solid rgba(255, 142, 0, 0.3);
-    border-radius: 24px;
+    border: 1px solid rgba(255, 142, 0, 0.3); border-radius: 24px;
     box-shadow: 0 14px 50px rgba(255, 142, 0, 0.08);
   }
-  .verdict .small { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--saffron); }
-  .verdict h2 { font-size: 26px; font-weight: 700; margin: 8px 0 22px; letter-spacing: -0.015em; }
-  .verdict-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
-  }
-  .verdict-card {
+  .plan .small { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--saffron); }
+  .plan h2 { font-size: 26px; font-weight: 700; margin: 8px 0 20px; letter-spacing: -0.015em; }
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .plan-card {
     background: var(--white); border: 1px solid var(--divider); border-radius: 14px;
-    padding: 16px; font-size: 13.5px; color: var(--ink-med); line-height: 1.6;
+    padding: 16px; font-size: 13px; color: var(--ink-med); line-height: 1.55;
   }
-  .verdict-card .k {
-    display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px;
-  }
-  .verdict-card b { color: var(--ink-dark); font-weight: 600; }
-  .verdict-card .big { font-size: 17px; font-weight: 700; color: var(--ink-dark); display: block; margin-top: 2px; }
-  .verdict-card.feat { border-color: rgba(255, 142, 0, 0.4); background: #fff9ec; }
-  .verdict-card.feat .big { color: var(--saffron); }
+  .plan-card .k { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 4px; }
+  .plan-card b { color: var(--ink-dark); font-weight: 600; }
+  .plan-card .big { font-size: 15.5px; font-weight: 700; color: var(--ink-dark); display: block; margin: 2px 0 6px; }
 
-  .verdict-reasoning {
-    margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--divider);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
-    font-size: 13px; color: var(--ink-med);
-  }
-  @media (max-width: 640px) { .verdict-reasoning { grid-template-columns: 1fr; } }
-  .verdict-reasoning h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; color: var(--ink-dark); letter-spacing: 0.05em; }
-
-  /* ============== PHONE / SCREEN STYLES ============== */
+  /* =========== SECTION =========== */
   section.flow {
     margin: 56px 0; padding: 36px 24px 40px;
     background: var(--white); border: 1px solid var(--divider); border-radius: 28px;
@@ -109,22 +97,18 @@
     padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
     background: linear-gradient(90deg, var(--orange-1), var(--orange-2)); color: white;
   }
-  section.flow .step-num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--saffron); color: white; font-weight: 700; font-size: 13px;
-    margin-right: 8px;
-  }
+  section.flow .tag.neutral { background: #ecebe6; color: var(--ink-med); }
   section.flow h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 10px; font-weight: 700; letter-spacing: -0.015em; }
-  section.flow .lead { color: var(--ink-med); font-size: 15.5px; max-width: 760px; margin: 0 0 28px; }
+  section.flow .lead { color: var(--ink-med); font-size: 15.5px; max-width: 780px; margin: 0 0 28px; }
 
   .phones {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
     gap: 28px; justify-items: center; margin-top: 20px;
   }
 
+  /* =========== PHONE =========== */
   .phone {
-    width: 288px; border-radius: 44px; background: #1a1a1a;
+    width: 290px; border-radius: 44px; background: #1a1a1a;
     padding: 8px; border: 1px solid #2a2a2a;
     box-shadow: 0 24px 60px rgba(50, 30, 0, 0.25), 0 6px 18px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -134,8 +118,8 @@
     width: 88px; height: 24px; border-radius: 12px; background: #1a1a1a; z-index: 4;
   }
   .phone .screen {
-    background: var(--cream-bg); color: var(--ink-dark);
-    border-radius: 36px; height: 600px; padding-top: 46px;
+    background: var(--white); color: var(--ink-dark);
+    border-radius: 36px; height: 612px; padding-top: 46px;
     overflow: hidden; position: relative; display: flex; flex-direction: column;
   }
   .phone .statusbar {
@@ -144,33 +128,60 @@
     font-size: 11px; font-weight: 600; color: var(--ink-dark); z-index: 5;
   }
 
-  .screen .app-header { padding: 14px 20px; background: var(--white); border-bottom: 1px solid var(--divider); flex-shrink: 0; }
-  .screen .app-header.has-back { display: flex; align-items: center; gap: 12px; }
-  .screen .app-header .back { font-size: 18px; color: var(--ink-dark); }
-  .screen .app-header .title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
-  .screen .app-header .subtitle { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .app-header { padding: 14px 20px; background: var(--white); border-bottom: 1px solid var(--divider); flex-shrink: 0; }
+  .app-header.has-back { display: flex; align-items: center; gap: 12px; }
+  .app-header .back { font-size: 18px; color: var(--ink-dark); }
+  .app-header .title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .app-header .subtitle { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .app-header .trailing { margin-left: auto; color: var(--ink-light); font-size: 18px; }
 
-  .top-tabs {
-    display: flex; background: var(--white); border-bottom: 1px solid var(--divider);
-    font-size: 12px; font-weight: 500; flex-shrink: 0;
+  /* =========== MANTRA SEGMENT (real app: underline-only) =========== */
+  .mantra-segments {
+    display: flex; background: var(--white); border-bottom: 1px solid var(--divider-soft);
+    font-size: 14px; flex-shrink: 0;
   }
-  .top-tabs .tt { flex: 1; text-align: center; padding: 10px 4px 12px; color: #c8c8c8; position: relative; }
-  .top-tabs .tt.active { color: var(--saffron); font-weight: 600; }
-  .top-tabs .tt.active::after {
-    content: ""; position: absolute; left: 24%; right: 24%; bottom: 0;
-    height: 2px; background: var(--saffron); border-radius: 2px;
+  .mantra-segments .seg {
+    flex: 1; text-align: center; padding: 14px 6px 12px;
+    color: var(--ink-light); font-weight: 500;
+    position: relative; cursor: pointer;
   }
+  .mantra-segments .seg::after {
+    content: ""; position: absolute; left: 18%; right: 18%; bottom: 0;
+    height: 3px; background: var(--seg-inactive); border-radius: 2px 2px 0 0;
+  }
+  .mantra-segments .seg.active { color: var(--ink-dark); font-weight: 700; }
+  .mantra-segments .seg.active::after { background: var(--saffron); }
+
+  /* Searchbar inside tab */
+  .searchbar { padding: 10px 16px; background: var(--white); border-bottom: 1px solid var(--divider-soft); flex-shrink: 0; }
+  .searchbar .input {
+    background: #f5f2ea; padding: 9px 12px; border-radius: 10px;
+    font-size: 12px; color: var(--ink-light);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Deity chips */
+  .chips {
+    display: flex; gap: 6px; padding: 10px 14px;
+    background: var(--white); border-bottom: 1px solid var(--divider-soft);
+    overflow-x: auto; flex-shrink: 0;
+  }
+  .chips .chip {
+    font-size: 11px; font-weight: 500; padding: 6px 12px;
+    border-radius: 999px; border: 1px solid var(--divider-soft);
+    background: var(--white); color: var(--ink-med); white-space: nowrap;
+  }
+  .chips .chip.active { background: var(--saffron); color: white; border-color: var(--saffron); font-weight: 600; }
 
   .scroll { flex: 1; overflow-y: auto; background: var(--white); }
-  .scroll.cream { background: var(--cream-bg); }
 
   .mantra-row {
     display: flex; align-items: center; gap: 14px;
-    padding: 12px 18px; border-bottom: 1px solid var(--divider); background: var(--white);
+    padding: 13px 18px; border-bottom: 1px solid var(--divider-soft); background: var(--white);
   }
   .mantra-row:last-child { border-bottom: none; }
   .mantra-circle {
-    width: 52px; height: 52px; border-radius: 50%;
+    width: 54px; height: 54px; border-radius: 50%;
     background: linear-gradient(135deg, #fac95f 0%, #ff950f 100%);
     display: flex; align-items: center; justify-content: center;
     color: white; font-size: 18px; font-weight: 700; flex-shrink: 0;
@@ -179,152 +190,99 @@
   }
   .mantra-circle.brown { background: linear-gradient(135deg, #e2a729, #bc7922); }
   .mantra-circle.gold  { background: linear-gradient(135deg, #f7d063, #eebf33); }
-  .mantra-circle.small { width: 36px; height: 36px; font-size: 13px; }
   .mantra-row .txt { flex: 1; min-width: 0; }
   .mantra-row .t1 { font-size: 14px; font-weight: 600; color: var(--ink-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .mantra-row .t2 { font-size: 11.5px; color: var(--ink-light); margin-top: 2px; }
+  .mantra-row .t2 { font-size: 11.5px; color: var(--ink-light); margin-top: 3px; }
   .mantra-row .chev { color: #bbb; font-size: 14px; }
 
-  .group-header {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--ink-light);
-    padding: 16px 18px 6px; background: var(--cream-bg); border-bottom: 1px solid var(--divider);
-  }
-
-  .home-card {
-    background: var(--white); border: 1px solid var(--divider);
-    border-radius: 14px; padding: 14px; margin: 8px 12px;
-    display: flex; align-items: center; gap: 12px;
-    position: relative;
-  }
-  .home-card.primary {
-    background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
-    border: none; color: white;
-  }
-  .home-card.primary .t2 { color: rgba(255,255,255,0.85); }
-  .home-card.new {
-    background: linear-gradient(90deg, rgba(255, 142, 0, 0.08) 0%, var(--white) 50%);
-    border: 1px solid rgba(255, 142, 0, 0.3);
-  }
-  .home-card .tile-ic {
-    width: 44px; height: 44px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .home-card .t1 { font-size: 14px; font-weight: 600; }
-  .home-card .t2 { font-size: 11px; color: var(--ink-light); margin-top: 2px; }
-  .home-card .new-pill {
-    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-    background: var(--saffron); color: white;
-    font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
-    padding: 3px 7px; border-radius: 4px;
-  }
-  .home-card .chev { margin-left: auto; color: #bbb; font-size: 14px; }
-
-  .bottom-tabs {
-    display: flex; background: var(--white); border-top: 1px solid var(--divider);
-    height: 60px; flex-shrink: 0;
-  }
-  .bottom-tabs .bt {
-    flex: 1; text-align: center; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; gap: 2px;
-    font-size: 10px; font-weight: 500; color: var(--tab-inactive);
-  }
-  .bottom-tabs .bt .ico { font-size: 18px; }
-  .bottom-tabs .bt.active { color: var(--tab-active); }
-  .bottom-tabs .bt.center-action {
-    background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); color: white;
-    margin: 4px 8px; border-radius: 14px; font-size: 10px; font-weight: 700;
-  }
-
-  /* Search bar */
-  .searchbar { padding: 10px 16px; background: var(--white); border-bottom: 1px solid var(--divider); flex-shrink: 0; }
-  .searchbar .input {
-    background: var(--cream-bg); padding: 9px 12px; border-radius: 10px;
-    font-size: 12px; color: var(--ink-light);
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  /* Deity chips */
-  .chips {
-    display: flex; gap: 6px; padding: 10px 14px;
-    background: var(--white); border-bottom: 1px solid var(--divider);
-    overflow-x: auto; flex-shrink: 0;
-  }
-  .chips .chip {
-    font-size: 11px; font-weight: 500; padding: 6px 12px;
-    border-radius: 999px; border: 1px solid var(--divider);
-    background: var(--cream-card); color: var(--ink-med); white-space: nowrap;
-  }
-  .chips .chip.active {
-    background: var(--saffron); color: white; border-color: var(--saffron); font-weight: 600;
-  }
-
-  /* Rail (curated group) */
-  .rail { padding: 6px 0 10px; border-bottom: 1px solid var(--divider); }
-  .rail .rail-title {
+  .rail-title {
     font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--ink-dark);
-    padding: 14px 18px 10px;
-    display: flex; align-items: center; gap: 6px;
+    padding: 16px 18px 8px; background: var(--white);
+    display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--divider-soft);
   }
-  .rail .rail-title .emoji { font-size: 12px; }
-  .rail .rail-title .see-all {
-    margin-left: auto; font-size: 10px; color: var(--saffron); font-weight: 600; letter-spacing: 0.08em;
+  .rail-title .see-all { margin-left: auto; font-size: 10px; color: var(--saffron); font-weight: 600; }
+
+  /* =========== REAL BOTTOM NAV =========== */
+  .bottom-nav {
+    display: flex;
+    background: var(--white);
+    border-top: 1px solid var(--divider);
+    height: 64px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .bottom-nav .nav-item {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    padding: 8px 2px;
+  }
+  .bottom-nav .nav-item .ico svg { width: 22px; height: 22px; display: block; }
+  .bottom-nav .nav-item .ico svg path,
+  .bottom-nav .nav-item .ico svg circle,
+  .bottom-nav .nav-item .ico svg line { stroke: var(--saffron); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .bottom-nav .nav-item .ico svg.filled path { fill: var(--saffron); stroke: none; }
+  .bottom-nav .nav-item.inactive .ico svg path,
+  .bottom-nav .nav-item.inactive .ico svg circle,
+  .bottom-nav .nav-item.inactive .ico svg line { stroke: var(--saffron-dim); }
+  .bottom-nav .nav-item .lab {
+    font-size: 10px; font-weight: 400; color: var(--ink-dark); letter-spacing: 0.01em;
+  }
+  .bottom-nav .nav-item.inactive .lab { color: var(--ink-40); }
+  .bottom-nav .nav-item.active .lab { font-weight: 600; }
+
+  /* Center raised button */
+  .bottom-nav .start-bubble {
+    position: absolute; left: 50%; top: -16px; transform: translateX(-50%);
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--saffron);
+    box-shadow: 0 6px 18px rgba(255, 142, 0, 0.35), 0 2px 6px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 5;
+  }
+  .bottom-nav .start-bubble svg { width: 34px; height: 34px; }
+  .bottom-nav .start-spacer { flex: 1; }
+  .bottom-nav .start-bubble .lbl {
+    position: absolute; top: 62px; font-size: 10px; color: var(--ink-dark); font-weight: 600; white-space: nowrap;
   }
 
-  /* Crosslink card on Mantras tab */
-  .crosslink {
-    margin: 10px 12px; padding: 12px 14px;
-    background: linear-gradient(135deg, rgba(255, 142, 0, 0.08), var(--cream-bg));
-    border: 1px dashed rgba(255, 142, 0, 0.4);
-    border-radius: 12px; display: flex; align-items: center; gap: 12px;
-    font-size: 12px;
-  }
-  .crosslink .em { font-size: 22px; }
-  .crosslink .msg { flex: 1; color: var(--ink-med); line-height: 1.4; }
-  .crosslink .msg b { color: var(--ink-dark); font-weight: 600; }
-  .crosslink .arrow { color: var(--saffron); font-weight: 700; font-size: 16px; }
+  /* Future puja nav variant */
+  .bottom-nav.future .nav-item.puja .ico svg path,
+  .bottom-nav.future .nav-item.puja .ico svg circle { stroke: var(--saffron); }
+  .bottom-nav.future .nav-item.puja.active .ico { filter: drop-shadow(0 2px 4px rgba(255,142,0,0.3)); }
 
-  /* ============== INTENT SHEET ============== */
+  .caption { text-align: center; margin-top: 14px; color: var(--ink-light); font-size: 12.5px; max-width: 290px; line-height: 1.5; }
+  .caption b { color: var(--saffron); font-weight: 700; }
+  .caption .diff { color: var(--ok); font-weight: 700; }
+
+  /* =========== INTENT SHEET =========== */
   .intent-sheet-wrap {
-    position: relative; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; width: 100%; flex: 1;
+    background: rgba(0, 0, 0, 0.4); display: flex; flex-direction: column; justify-content: flex-end;
   }
   .intent-sheet-wrap .behind {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--cream-bg); opacity: 0.4; filter: blur(2px);
+    background: var(--white); opacity: 0.4; filter: blur(3px);
   }
   .intent-sheet {
-    position: relative;
-    background: var(--white); border-radius: 24px 24px 0 0;
-    padding: 18px 16px 30px;
+    position: relative; background: var(--white); border-radius: 24px 24px 0 0;
+    padding: 14px 16px 28px;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
   }
   .intent-sheet .grabber {
     width: 40px; height: 4px; border-radius: 2px; background: #d0d0d0;
-    margin: 0 auto 16px;
+    margin: 0 auto 14px;
   }
-  .intent-sheet .h {
-    text-align: center; font-size: 16px; font-weight: 700; margin-bottom: 4px;
-  }
-  .intent-sheet .sub {
-    text-align: center; font-size: 12px; color: var(--ink-light);
-    margin-bottom: 18px;
-  }
+  .intent-sheet .h { text-align: center; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .intent-sheet .sub { text-align: center; font-size: 12px; color: var(--ink-light); margin-bottom: 18px; }
   .mode-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .mode-tile {
     padding: 16px 12px; border-radius: 14px;
-    border: 2px solid transparent; text-align: center; cursor: pointer;
-    transition: all 0.2s;
+    border: 2px solid transparent; text-align: center;
   }
-  .mode-tile.study {
-    background: var(--cream-bg); border-color: var(--divider);
-  }
+  .mode-tile.study { background: var(--cream-bg); border-color: var(--divider-soft); }
   .mode-tile.study.default { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255, 142, 0, 0.12); }
-  .mode-tile.chant {
-    background: var(--chant-dark); color: white; border-color: var(--chant-dark);
-  }
+  .mode-tile.chant { background: var(--chant-dark); color: white; border-color: var(--chant-dark); }
   .mode-tile .ic { font-size: 26px; margin-bottom: 6px; }
   .mode-tile .ic.saffron { color: var(--saffron); }
   .mode-tile .t1 { font-size: 13px; font-weight: 700; }
@@ -333,15 +291,14 @@
   .mode-tile .rec-pill {
     display: inline-block; margin-top: 8px;
     font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
-    padding: 2px 7px; border-radius: 999px;
-    background: var(--saffron); color: white;
+    padding: 2px 7px; border-radius: 999px; background: var(--saffron); color: white;
   }
 
-  /* ============== STUDY MODE ============== */
+  /* =========== STUDY MODE =========== */
   .mode-toggle {
-    display: flex; margin: 12px 16px;
+    display: flex; margin: 10px 16px;
     background: var(--cream-bg); border-radius: 999px; padding: 3px;
-    border: 1px solid var(--divider); flex-shrink: 0;
+    border: 1px solid var(--divider-soft); flex-shrink: 0;
   }
   .mode-toggle .seg {
     flex: 1; text-align: center; padding: 7px 10px;
@@ -351,19 +308,19 @@
   .mode-toggle .seg.active { background: var(--white); color: var(--ink-dark); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 
   .lang-switch {
-    display: flex; gap: 6px; justify-content: center;
+    display: flex; gap: 6px; justify-content: flex-start;
     padding: 10px 14px; background: var(--cream-bg);
-    border-bottom: 1px solid var(--divider); overflow-x: auto; flex-shrink: 0;
+    border-bottom: 1px solid var(--divider-soft); overflow-x: auto; flex-shrink: 0;
   }
   .lang-switch .pill {
     font-size: 11px; padding: 6px 12px; border-radius: 999px;
-    border: 1px solid var(--divider); background: var(--white);
+    border: 1px solid var(--divider-soft); background: var(--white);
     color: var(--ink-med); font-weight: 500; white-space: nowrap; flex-shrink: 0;
   }
   .lang-switch .pill.active { background: var(--saffron); color: white; border-color: var(--saffron); font-weight: 600; }
 
   .chant-reader { background: var(--white); flex: 1; overflow-y: auto; }
-  .verse-block { padding: 16px 22px; border-bottom: 1px solid var(--divider); }
+  .verse-block { padding: 16px 22px; border-bottom: 1px solid var(--divider-soft); }
   .verse-block .vn {
     font-size: 9.5px; color: var(--ink-light); font-weight: 700;
     letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
@@ -372,22 +329,15 @@
     font-family: "Noto Serif Devanagari", serif;
     font-size: 16px; line-height: 1.75; color: var(--ink-dark); font-weight: 500;
   }
-  .verse-block .translit {
-    font-size: 12.5px; line-height: 1.6; color: var(--ink-med);
-    font-style: italic; margin-top: 8px;
-  }
   .verse-block .meaning {
     font-size: 12px; line-height: 1.55; color: var(--ink-med);
-    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--divider);
+    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--divider-soft);
   }
 
-  /* ============== CHANT MODE (full-bleed, no tab bar) ============== */
-  .chant-mode-full {
-    background: var(--chant-dark); flex: 1; overflow-y: auto; position: relative;
-    padding: 0;
-  }
+  /* =========== CHANT MODE =========== */
+  .chant-mode-full { background: var(--chant-dark); flex: 1; overflow-y: auto; position: relative; }
   .chant-mode-header {
-    position: sticky; top: 0; left: 0; right: 0; z-index: 3;
+    position: sticky; top: 0; z-index: 3;
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 20px; background: linear-gradient(180deg, var(--chant-dark) 60%, transparent);
   }
@@ -402,9 +352,7 @@
     letter-spacing: 0.12em; text-transform: uppercase;
     padding: 4px 9px; border: 1px solid rgba(255, 142, 0, 0.4); border-radius: 999px;
   }
-  .chant-mode-body {
-    padding: 24px 22px 80px;
-  }
+  .chant-mode-body { padding: 16px 22px 80px; }
   .chant-mode-body .big {
     font-family: "Noto Serif Devanagari", serif;
     font-size: 28px; line-height: 1.9; color: #fff8e9; font-weight: 500;
@@ -412,12 +360,8 @@
   }
   .chant-mode-body .big.fade { opacity: 0.3; }
   .chant-mode-body .big.active { color: var(--saffron); text-shadow: 0 0 20px rgba(255, 142, 0, 0.3); }
-  .chant-mode-body .progress-dots {
-    display: flex; justify-content: center; gap: 4px; margin: 8px 0 20px;
-  }
-  .chant-mode-body .progress-dots .dot {
-    width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2);
-  }
+  .chant-mode-body .progress-dots { display: flex; justify-content: center; gap: 4px; margin: 8px 0 20px; }
+  .chant-mode-body .progress-dots .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2); }
   .chant-mode-body .progress-dots .dot.active { background: var(--saffron); width: 20px; border-radius: 3px; }
   .chant-mode-footer {
     position: absolute; bottom: 0; left: 0; right: 0;
@@ -426,30 +370,39 @@
     text-align: center; letter-spacing: 0.15em; text-transform: uppercase;
   }
 
-  /* Engineering notes */
-  .eng-notes {
-    margin: 40px 0; padding: 32px 28px;
-    background: #fafaf6; border: 1px solid var(--divider); border-radius: 20px;
+  /* =========== MENU DIFF BLOCK =========== */
+  .menu-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin-bottom: 24px;
   }
-  .eng-notes h3 { margin: 0 0 18px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
-  .eng-notes .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px;
+  @media (max-width: 640px) { .menu-compare { grid-template-columns: 1fr; } }
+  .menu-col {
+    background: #fafaf6; border: 1px solid var(--divider); border-radius: 18px;
+    padding: 18px; text-align: center;
   }
-  .eng-notes .item {
-    background: var(--white); border: 1px solid var(--divider); border-radius: 14px;
-    padding: 16px; font-size: 13px; color: var(--ink-med); line-height: 1.6;
+  .menu-col h4 { font-size: 12px; font-weight: 700; color: var(--ink-dark); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 6px; }
+  .menu-col .note { font-size: 12px; color: var(--ink-light); margin-bottom: 16px; }
+  .menu-col.proposal h4 { color: var(--saffron); }
+  .menu-strip {
+    display: flex; gap: 2px; justify-content: space-between;
+    background: var(--white); border: 1px solid var(--divider);
+    border-radius: 12px; padding: 10px; position: relative;
   }
-  .eng-notes .item h4 {
-    margin: 0 0 6px; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.06em; color: var(--ink-dark);
+  .menu-strip .mi {
+    flex: 1; text-align: center; font-size: 10px; color: var(--ink-40); font-weight: 500;
   }
-  .eng-notes .item code {
-    background: var(--cream-bg); padding: 2px 6px; border-radius: 4px;
-    font-size: 11.5px; color: var(--ink-dark);
+  .menu-strip .mi .dot { display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--saffron-dim); margin: 0 auto 4px; }
+  .menu-strip .mi.active { color: var(--ink-dark); font-weight: 600; }
+  .menu-strip .mi.active .dot { background: var(--saffron); }
+  .menu-strip .mi.removed { text-decoration: line-through; color: #c5c5c5; }
+  .menu-strip .mi.removed .dot { background: #e0e0e0; }
+  .menu-strip .mi.new .dot { background: var(--ok); }
+  .menu-strip .mi.new .lab { color: var(--ok); font-weight: 700; }
+  .menu-strip .start {
+    position: absolute; left: 50%; top: -12px; transform: translateX(-50%);
+    width: 32px; height: 32px; border-radius: 50%; background: var(--saffron);
+    box-shadow: 0 3px 8px rgba(255,142,0,0.35);
   }
-
-  .caption { text-align: center; margin-top: 14px; color: var(--ink-light); font-size: 12.5px; max-width: 290px; line-height: 1.5; }
-  .caption b { color: var(--saffron); font-weight: 700; }
 
   footer { text-align: center; padding: 40px 20px 60px; color: var(--ink-light); font-size: 12.5px; }
   footer a { color: var(--saffron); text-decoration: none; font-weight: 500; }
@@ -460,219 +413,317 @@
     header { padding: 40px 16px 12px; }
     section.flow { padding: 28px 18px 32px; margin: 36px 0; }
     header .stats span + span { padding-left: 0; border-left: none; }
-    .verdict { padding: 24px 18px; }
+    .plan { padding: 24px 18px; }
   }
 </style>
+
+<!-- Reusable SVG sprite for nav icons (faithful to real app's outlined saffron style) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-home" viewBox="0 0 24 24">
+    <path d="M3 12l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>
+  </symbol>
+  <symbol id="ic-mantra" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5"/>
+    <line x1="15.5" y1="15.5" x2="20" y2="20"/>
+  </symbol>
+  <symbol id="ic-community" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>
+  </symbol>
+  <symbol id="ic-profile" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>
+  </symbol>
+  <symbol id="ic-puja" viewBox="0 0 24 24">
+    <!-- lotus/flame -->
+    <path d="M12 3c-1 3-4 4-4 7a4 4 0 008 0c0-3-3-4-4-7z"/>
+    <path d="M4 16c3 2 5 3 8 3s5-1 8-3"/>
+    <path d="M5 20c2 1 4 1 7 1s5 0 7-1"/>
+  </symbol>
+  <symbol id="ic-start" viewBox="0 0 34 34">
+    <!-- approximation of startBubble: 8 small white beads in a loop + a pendant -->
+    <circle cx="17" cy="8"  r="1.8" fill="white"/>
+    <circle cx="22.5" cy="9.5"  r="1.8" fill="white"/>
+    <circle cx="25.5" cy="14"  r="1.8" fill="white"/>
+    <circle cx="25"  cy="19" r="1.8" fill="white"/>
+    <circle cx="11.5" cy="9.5"  r="1.8" fill="white"/>
+    <circle cx="8.5" cy="14" r="1.8" fill="white"/>
+    <circle cx="9"   cy="19" r="1.8" fill="white"/>
+    <path d="M14 22 L20 22 L17 27 Z" fill="white"/>
+  </symbol>
+</svg>
 </head>
 <body>
 
 <header>
-  <span class="eyebrow">Japa Chants × Japa108 · integration plan v3</span>
-  <h1>Bringing <span class="accent">1,162 stotras</span> into the iOS &amp; Android app</h1>
-  <p class="sub">Synthesized from real app IA, UX review, and mobile engineering review. One recommended path — no more A/B/C.</p>
+  <span class="eyebrow">Japa108 · integration plan v4</span>
+  <h1>Chants inside <span class="accent">Mantras</span> · with a Puja-ready menu</h1>
+  <p class="sub">Faithful to the real app visual language. <b>Chants</b> becomes the 3rd segment in the Mantras tab, alongside Mantras and Rituals. The bottom nav makes room for <b>Puja</b> later.</p>
   <div class="stats">
-    <span><b>1,162</b> stotras</span>
+    <span><b>1,162</b> chants</span>
     <span><b>34,111</b> verses</span>
     <span><b>25</b> deities</span>
     <span><b>2</b> modes</span>
-    <span><b>Offline</b>-first</span>
+    <span>Offline-first</span>
   </div>
 </header>
 
 <nav class="section-nav">
-  <a href="#verdict">The verdict</a>
-  <a href="#entry">Entry points</a>
-  <a href="#browse">Browse &amp; search</a>
-  <a href="#mode-pick">Mode picker</a>
-  <a href="#study">Study mode</a>
-  <a href="#chant">Chant mode</a>
-  <a href="#eng">Engineering notes</a>
+  <a href="#plan">Plan</a>
+  <a href="#menu">Menu redesign</a>
+  <a href="#segments">Mantras segments</a>
+  <a href="#browse">Browse</a>
+  <a href="#modes">Modes</a>
+  <a href="#study">Study</a>
+  <a href="#chant">Chant</a>
 </nav>
 
 <main>
 
-<!-- ============== VERDICT ============== -->
-<section class="verdict" id="verdict">
-  <span class="small">The verdict</span>
-  <h2>Dedicated stack from a Home card. Called "Stotras." Two modes.</h2>
-  <div class="verdict-grid">
-    <div class="verdict-card feat">
-      <span class="k">Where</span>
-      <span class="big">New Home card</span>
-      "Stotras" card joins the existing Home collection (Shortcuts · Routines · Challenges…). Tapping it pushes a dedicated <code>ChantLibraryViewController</code> — not a segmented tab inside Mantras.
+<!-- ========== PLAN ========== -->
+<section class="plan" id="plan">
+  <span class="small">Plan v4 · what changed</span>
+  <h2>Chants under Mantras. Puja-ready menu. Same real design.</h2>
+  <div class="plan-grid">
+    <div class="plan-card">
+      <span class="k">Placement</span>
+      <span class="big">Inside Mantras tab</span>
+      Chants becomes the 3rd segment — alongside <b>Mantras</b> and <b>Rituals</b>. Your mental model, not a dedicated stack.
     </div>
-    <div class="verdict-card">
-      <span class="k">Why not Mantras subtab</span>
-      <span class="big">Mantras is a god-controller</span>
-      <code>JAMantraGroupViewController</code> is 1000+ lines with a binary segment state, server-paginated dicts, one reuse pool. Grafting SQLite-backed chants on is bolt-on, not extension.
+    <div class="plan-card">
+      <span class="k">Menu redesign</span>
+      <span class="big">Community → Profile, Puja in</span>
+      Community folds into Profile (feed + awards + stats). <b>Puja</b> takes the 4th visible tab slot so it's discoverable when it launches.
     </div>
-    <div class="verdict-card">
-      <span class="k">Name</span>
-      <span class="big">"Stotras"</span>
-      Not "Chants." Too close to <em>chanting</em> (= japa). "Stotras" puts linguistic distance between the reading library and the counting experience.
+    <div class="plan-card">
+      <span class="k">Visual language</span>
+      <span class="big">Faithful to the real app</span>
+      White nav with <code>#DEDEDE</code> top border, saffron outlined icons, raised <b>Start Japa</b> circle in the center, underline-only Mantras segments.
     </div>
-    <div class="verdict-card">
-      <span class="k">Mental-model bridge</span>
-      <span class="big">Crosslink from Mantras</span>
-      A small card at the top of the Mantras list: "Looking for longer stotras? →" points into the dedicated stack. Cheap to build; preserves UX continuity.
-    </div>
-    <div class="verdict-card">
+    <div class="plan-card">
       <span class="k">Two reading modes</span>
       <span class="big">📘 Study · ✦ Chant</span>
-      First open of any stotra shows a bottom-sheet picker. Remembered per-stotra. New-user default: Study (so beginners don't land on raw Sanskrit).
-    </div>
-    <div class="verdict-card">
-      <span class="k">Data</span>
-      <span class="big">Bundled SQLite</span>
-      Sanskrit ships in-app (~30MB); other scripts download on first selection. Offline-first — devotional apps fail if network is required. OTA deltas via CDN.
-    </div>
-  </div>
-
-  <div class="verdict-reasoning">
-    <div>
-      <h4>UX review said</h4>
-      Chants mentally belong near mantras, but the app should protect counter primacy. Search is non-negotiable for 1,162 items. Default to Study mode. Chant mode must be full-bleed — hide the tab bar. Drop a weak Home section (Horoscope?) when adding Stotras.
-    </div>
-    <div>
-      <h4>Mobile eng review said</h4>
-      Don't graft onto <code>JAMantraGroupViewController</code>; build a new stack. Use <code>UITextView</code> (not <code>UILabel</code>) for Devanagari ligatures. <code>RecyclerView</code> with stable IDs. Auto-scroll pauses on audio interruption. Bundle per-script SQLite. Deep-links resolve cleanly via a dedicated stack.
+      Kept from v3. Bottom-sheet picker on first open of each chant. Remembered per-chant.
     </div>
   </div>
 </section>
 
-<!-- ============== ENTRY POINTS ============== -->
-<section class="flow" id="entry">
+<!-- ========== MENU REDESIGN ========== -->
+<section class="flow" id="menu">
   <span class="tag">Step 1</span>
-  <h2><span class="step-num">1</span>Entry points</h2>
-  <p class="lead">A Home card is the canonical entry. A gentle crosslink from the Mantras tab bridges the mental model without muddling the god-controller.</p>
-  <div class="phones">
+  <h2>Bottom navigation · now and future</h2>
+  <p class="lead">The real app today has 4 tabs plus a raised Start Japa button in the center. We need to accommodate a future <b>Puja</b> tab. Simplest path: move Community under Profile (it's a social feed — a natural sibling of awards and stats), freeing the 4th slot for Puja.</p>
 
-    <!-- Home card -->
+  <div class="menu-compare">
+    <div class="menu-col">
+      <h4>Today</h4>
+      <div class="note">4 tabs + raised Start Japa</div>
+      <div class="menu-strip">
+        <div class="start"></div>
+        <div class="mi active"><span class="dot"></span><span class="lab">Home</span></div>
+        <div class="mi"><span class="dot"></span><span class="lab">Mantras</span></div>
+        <div class="mi" style="opacity:0"><span class="dot"></span><span class="lab">·</span></div>
+        <div class="mi"><span class="dot"></span><span class="lab">Community</span></div>
+        <div class="mi"><span class="dot"></span><span class="lab">Profile</span></div>
+      </div>
+    </div>
+    <div class="menu-col proposal">
+      <h4>Proposal — Puja-ready</h4>
+      <div class="note">Community merged into Profile. Puja slot ready.</div>
+      <div class="menu-strip">
+        <div class="start"></div>
+        <div class="mi active"><span class="dot"></span><span class="lab">Home</span></div>
+        <div class="mi"><span class="dot"></span><span class="lab">Mantras</span></div>
+        <div class="mi" style="opacity:0"><span class="dot"></span><span class="lab">·</span></div>
+        <div class="mi new"><span class="dot"></span><span class="lab">Puja</span></div>
+        <div class="mi"><span class="dot"></span><span class="lab">Profile</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phones">
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
           <div class="app-header"><div class="title">Home</div><div class="subtitle">Namaste, Krishi</div></div>
-          <div class="scroll cream" style="padding-top: 6px;">
-            <div class="home-card primary">
-              <div class="tile-ic" style="background: rgba(255,255,255,0.15);">◯</div>
-              <div style="flex: 1;"><div class="t1">Continue Counter</div><div class="t2">Om Namah Shivaya · 42 / 108</div></div>
-              <span class="chev" style="color: rgba(255,255,255,0.6);">›</span>
+          <div style="flex:1; background: var(--cream-bg); padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); border-radius: 14px; padding: 16px; color: white;">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85;">Continue counter</div>
+              <div style="font-size: 17px; font-weight: 700; margin-top: 4px;">Om Namah Shivaya · 42 / 108</div>
             </div>
-            <div class="home-card">
-              <div class="tile-ic" style="background: #fef3c7; color: #b7791f;">🕉️</div>
-              <div><div class="t1">My Mantras</div><div class="t2">12 mantras</div></div>
-              <span class="chev">›</span>
+            <div style="background: var(--white); border: 1px solid var(--divider-soft); border-radius: 14px; padding: 14px;">
+              <div style="font-size: 13px; font-weight: 600;">My Mantras · 12</div>
+              <div style="font-size: 11px; color: var(--ink-light); margin-top: 2px;">Tap to browse your saved mantras</div>
             </div>
-            <div class="home-card">
-              <div class="tile-ic" style="background: #dbeafe; color: #1e40af;">🗓️</div>
-              <div><div class="t1">Routines</div><div class="t2">Morning sadhana · 7/7 days</div></div>
-              <span class="chev">›</span>
-            </div>
-            <div class="home-card new">
-              <div class="tile-ic" style="background: linear-gradient(135deg, #fac95f, #ff950f); color: white;">📖</div>
-              <div><div class="t1">Stotras</div><div class="t2">1,162 devotional texts · offline</div></div>
-              <span class="new-pill">NEW</span>
-            </div>
-            <div class="home-card">
-              <div class="tile-ic" style="background: #d1fae5; color: #059669;">🏆</div>
-              <div><div class="t1">Challenges</div><div class="t2">3 active</div></div>
-              <span class="chev">›</span>
+            <div style="background: var(--white); border: 1px solid var(--divider-soft); border-radius: 14px; padding: 14px;">
+              <div style="font-size: 13px; font-weight: 600;">Morning routine</div>
+              <div style="font-size: 11px; color: var(--ink-light); margin-top: 2px;">7/7 days this week</div>
             </div>
           </div>
-          <div class="bottom-tabs">
-            <div class="bt active"><div class="ico">🏠</div>Home</div>
-            <div class="bt"><div class="ico">🕉️</div>Mantras</div>
-            <div class="bt center-action"><div style="font-size:18px;">◯</div>Start</div>
-            <div class="bt"><div class="ico">👥</div>Community</div>
-            <div class="bt"><div class="ico">👤</div>Profile</div>
+          <!-- Real bottom nav · today -->
+          <div class="bottom-nav">
+            <div class="nav-item active"><div class="ico"><svg><use href="#ic-home"/></svg></div><div class="lab">Home</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-mantra"/></svg></div><div class="lab">Mantras</div></div>
+            <div class="start-spacer"></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-community"/></svg></div><div class="lab">Community</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-profile"/></svg></div><div class="lab">Profile</div></div>
+            <div class="start-bubble"><svg><use href="#ic-start"/></svg></div>
           </div>
         </div>
       </div>
-      <div class="caption"><b>New "Stotras" card on Home.</b> Sits alongside the existing cards. Consider retiring a weak section (Horoscope?) to avoid bloat.</div>
+      <div class="caption"><b>Today</b> · white nav · saffron outlined icons · raised saffron Start Japa circle · <code>#DEDEDE</code> top border.</div>
     </div>
 
-    <!-- Crosslink in Mantras -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="app-header"><div class="title">Home</div><div class="subtitle">Namaste, Krishi</div></div>
+          <div style="flex:1; background: var(--cream-bg); padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); border-radius: 14px; padding: 16px; color: white;">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85;">Continue counter</div>
+              <div style="font-size: 17px; font-weight: 700; margin-top: 4px;">Om Namah Shivaya · 42 / 108</div>
+            </div>
+            <div style="background: var(--white); border: 1px solid var(--divider-soft); border-radius: 14px; padding: 14px; display:flex; align-items:center; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:#fef3c7; display:flex; align-items:center; justify-content:center; color:#b7791f; font-size:18px;">🕉️</div>
+              <div><div style="font-size: 13px; font-weight: 600;">My Mantras · 12</div><div style="font-size: 11px; color: var(--ink-light);">Tap to browse</div></div>
+            </div>
+            <div style="background: var(--white); border: 1px solid rgba(255,142,0,0.3); border-radius: 14px; padding: 14px; display:flex; align-items:center; gap:10px; background: linear-gradient(90deg, rgba(255,142,0,0.06), white);">
+              <div style="width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, #fac95f, #ff950f); display:flex; align-items:center; justify-content:center; color:white; font-size:18px;">📖</div>
+              <div style="flex:1;"><div style="font-size: 13px; font-weight: 600;">Chants library</div><div style="font-size: 11px; color: var(--ink-light);">1,162 stotras · in Mantras tab</div></div>
+              <span style="background: var(--saffron); color: white; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 6px; border-radius: 4px;">NEW</span>
+            </div>
+          </div>
+          <!-- Real bottom nav · future with Puja -->
+          <div class="bottom-nav future">
+            <div class="nav-item active"><div class="ico"><svg><use href="#ic-home"/></svg></div><div class="lab">Home</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-mantra"/></svg></div><div class="lab">Mantras</div></div>
+            <div class="start-spacer"></div>
+            <div class="nav-item inactive puja"><div class="ico"><svg><use href="#ic-puja"/></svg></div><div class="lab">Puja</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-profile"/></svg></div><div class="lab">Profile</div></div>
+            <div class="start-bubble"><svg><use href="#ic-start"/></svg></div>
+          </div>
+        </div>
+      </div>
+      <div class="caption"><b>Proposal</b> · Community moves to Profile · <span class="diff">Puja</span> takes its slot · same Start Japa. Home grows a small <b>Chants library</b> tile pointing into Mantras tab.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MANTRAS SEGMENTS ========== -->
+<section class="flow" id="segments">
+  <span class="tag">Step 2</span>
+  <h2>Mantras tab gains a 3rd segment · Chants</h2>
+  <p class="lead">The existing Mantras tab uses an underline-only segment control (saffron underline under active, gray under inactive — see <code>JAMantraTabView.swift</code>). We add a third segment, keeping the exact same visual pattern.</p>
+
+  <div class="phones">
+    <!-- Segment: Mantras -->
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
           <div class="app-header"><div class="title">Mantras</div><div class="subtitle">Your practice</div></div>
-          <div class="top-tabs"><div class="tt active">Mantras</div><div class="tt">Rituals</div></div>
+          <div class="mantra-segments">
+            <div class="seg active">Mantras</div>
+            <div class="seg">Rituals</div>
+            <div class="seg">Chants</div>
+          </div>
           <div class="scroll">
-            <div class="crosslink">
-              <span class="em">📖</span>
-              <div class="msg">Looking for longer stotras? <b>1,162 texts available</b></div>
-              <span class="arrow">→</span>
-            </div>
             <div class="mantra-row"><div class="mantra-circle">ॐ</div><div class="txt"><div class="t1">Om Namah Shivaya</div><div class="t2">Shiva · 108 repetitions</div></div><span class="chev">›</span></div>
             <div class="mantra-row"><div class="mantra-circle brown">ह</div><div class="txt"><div class="t1">Hare Krishna</div><div class="t2">Krishna · 108 repetitions</div></div><span class="chev">›</span></div>
             <div class="mantra-row"><div class="mantra-circle gold">ग</div><div class="txt"><div class="t1">Gayatri Mantra</div><div class="t2">Vedic · 108 repetitions</div></div><span class="chev">›</span></div>
             <div class="mantra-row"><div class="mantra-circle">श</div><div class="txt"><div class="t1">Shri Ram Jai Ram</div><div class="t2">Rama · 108 repetitions</div></div><span class="chev">›</span></div>
           </div>
-          <div class="bottom-tabs">
-            <div class="bt"><div class="ico">🏠</div>Home</div>
-            <div class="bt active"><div class="ico">🕉️</div>Mantras</div>
-            <div class="bt center-action"><div style="font-size:18px;">◯</div>Start</div>
-            <div class="bt"><div class="ico">👥</div>Community</div>
-            <div class="bt"><div class="ico">👤</div>Profile</div>
+          <div class="bottom-nav">
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-home"/></svg></div><div class="lab">Home</div></div>
+            <div class="nav-item active"><div class="ico"><svg><use href="#ic-mantra"/></svg></div><div class="lab">Mantras</div></div>
+            <div class="start-spacer"></div>
+            <div class="nav-item inactive puja"><div class="ico"><svg><use href="#ic-puja"/></svg></div><div class="lab">Puja</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-profile"/></svg></div><div class="lab">Profile</div></div>
+            <div class="start-bubble"><svg><use href="#ic-start"/></svg></div>
           </div>
         </div>
       </div>
-      <div class="caption">Discreet crosslink on the Mantras tab — <b>same destination as the Home card</b>. Low-cost: one extra cell at the top of the list.</div>
+      <div class="caption"><b>Mantras</b> segment active · <span class="diff">saffron underline</span> · today's experience unchanged.</div>
     </div>
-  </div>
-</section>
 
-<!-- ============== BROWSE & SEARCH ============== -->
-<section class="flow" id="browse">
-  <span class="tag">Step 2</span>
-  <h2><span class="step-num">2</span>Browse &amp; search · designed for 1,162 items</h2>
-  <p class="lead">Search is non-negotiable at this scale. Deity chips let users zoom to their ishta devata instantly. Curated rails — Popular · Short · New — give a first-time user a way in without forcing a deity choice.</p>
-
-  <div class="phones">
+    <!-- Segment: Rituals -->
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header has-back"><span class="back">‹</span><div><div class="title">Stotras</div><div class="subtitle">1,162 texts · offline</div></div></div>
-          <div class="searchbar"><div class="input">🔍 Search 1,162 stotras</div></div>
+          <div class="app-header"><div class="title">Mantras</div><div class="subtitle">Your practice</div></div>
+          <div class="mantra-segments">
+            <div class="seg">Mantras</div>
+            <div class="seg active">Rituals</div>
+            <div class="seg">Chants</div>
+          </div>
+          <div class="scroll">
+            <div class="rail-title">Your routines</div>
+            <div class="mantra-row"><div class="mantra-circle">🌅</div><div class="txt"><div class="t1">Morning sadhana</div><div class="t2">3 mantras · daily</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle brown">🌙</div><div class="txt"><div class="t1">Evening practice</div><div class="t2">Om Namah Shivaya · 30 min</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle gold">📅</div><div class="txt"><div class="t1">Monday schedule</div><div class="t2">Hanuman Chalisa · 9:00</div></div><span class="chev">›</span></div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-home"/></svg></div><div class="lab">Home</div></div>
+            <div class="nav-item active"><div class="ico"><svg><use href="#ic-mantra"/></svg></div><div class="lab">Mantras</div></div>
+            <div class="start-spacer"></div>
+            <div class="nav-item inactive puja"><div class="ico"><svg><use href="#ic-puja"/></svg></div><div class="lab">Puja</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-profile"/></svg></div><div class="lab">Profile</div></div>
+            <div class="start-bubble"><svg><use href="#ic-start"/></svg></div>
+          </div>
+        </div>
+      </div>
+      <div class="caption"><b>Rituals</b> segment · routines and schedules · today's experience.</div>
+    </div>
+
+    <!-- Segment: Chants (NEW) -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="app-header"><div class="title">Mantras</div><div class="subtitle">Your practice</div></div>
+          <div class="mantra-segments">
+            <div class="seg">Mantras</div>
+            <div class="seg">Rituals</div>
+            <div class="seg active">Chants</div>
+          </div>
+          <div class="searchbar"><div class="input">🔍 Search 1,162 chants</div></div>
           <div class="chips">
             <div class="chip active">All</div>
             <div class="chip">Shiva</div>
             <div class="chip">Vishnu</div>
             <div class="chip">Devi</div>
             <div class="chip">Ganesha</div>
-            <div class="chip">Krishna</div>
           </div>
           <div class="scroll">
-            <div class="rail">
-              <div class="rail-title"><span class="emoji">🔥</span>Popular today<span class="see-all">See all ›</span></div>
-              <div class="mantra-row"><div class="mantra-circle">भ</div><div class="txt"><div class="t1">Bhaja Govindam</div><div class="t2">Adi Shankaracharya · 3 min</div></div><span class="chev">›</span></div>
-              <div class="mantra-row"><div class="mantra-circle brown">ह</div><div class="txt"><div class="t1">Hanuman Chalisa</div><div class="t2">Tulsidas · 5 min</div></div><span class="chev">›</span></div>
-            </div>
-            <div class="rail">
-              <div class="rail-title"><span class="emoji">⏱️</span>Short · under 3 min<span class="see-all">See all ›</span></div>
-              <div class="mantra-row"><div class="mantra-circle gold">ग</div><div class="txt"><div class="t1">Ganesha Pancharatnam</div><div class="t2">5 verses · 2 min</div></div><span class="chev">›</span></div>
-              <div class="mantra-row"><div class="mantra-circle">म</div><div class="txt"><div class="t1">Mahamrityunjaya</div><div class="t2">1 verse · 1 min</div></div><span class="chev">›</span></div>
-            </div>
-            <div class="rail">
-              <div class="rail-title"><span class="emoji">✨</span>New this week</div>
-              <div class="mantra-row"><div class="mantra-circle brown">श</div><div class="txt"><div class="t1">Shiva Tandava Stotram</div><div class="t2">17 verses · 6 min</div></div><span class="chev">›</span></div>
-            </div>
+            <div class="rail-title">🔥 Popular today<span class="see-all">See all ›</span></div>
+            <div class="mantra-row"><div class="mantra-circle">भ</div><div class="txt"><div class="t1">Bhaja Govindam</div><div class="t2">Vedanta · 3 min · 31 verses</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle brown">ह</div><div class="txt"><div class="t1">Hanuman Chalisa</div><div class="t2">Tulsidas · 5 min · 40 verses</div></div><span class="chev">›</span></div>
+            <div class="rail-title">⏱️ Short · under 3 min</div>
+            <div class="mantra-row"><div class="mantra-circle gold">ग</div><div class="txt"><div class="t1">Ganesha Pancharatnam</div><div class="t2">Ganesha · 2 min · 5 verses</div></div><span class="chev">›</span></div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-home"/></svg></div><div class="lab">Home</div></div>
+            <div class="nav-item active"><div class="ico"><svg><use href="#ic-mantra"/></svg></div><div class="lab">Mantras</div></div>
+            <div class="start-spacer"></div>
+            <div class="nav-item inactive puja"><div class="ico"><svg><use href="#ic-puja"/></svg></div><div class="lab">Puja</div></div>
+            <div class="nav-item inactive"><div class="ico"><svg><use href="#ic-profile"/></svg></div><div class="lab">Profile</div></div>
+            <div class="start-bubble"><svg><use href="#ic-start"/></svg></div>
           </div>
         </div>
       </div>
-      <div class="caption">Search · deity chips · curated rails. <b>No A–Z list</b> — alphabetical is meaningless to beginners, boring to experts.</div>
+      <div class="caption"><span class="diff">NEW · Chants</span> segment · search · deity chips · curated rails · same design language.</div>
     </div>
   </div>
 </section>
 
-<!-- ============== MODE PICKER ============== -->
-<section class="flow" id="mode-pick">
+<!-- ========== MODE PICKER ========== -->
+<section class="flow" id="modes">
   <span class="tag">Step 3</span>
-  <h2><span class="step-num">3</span>First open · pick a mode</h2>
-  <p class="lead">On the first open of any given stotra, a bottom sheet asks Study or Chant. The default (outlined in saffron) is <b>Study</b> so beginners don't land on full-screen Sanskrit they can't read. Remembered per-stotra after — not a global setting.</p>
+  <h2>First open · pick a mode</h2>
+  <p class="lead">Tapping a chant from the list opens a bottom sheet: Study (learn) or Chant (recite). Study is the recommended default so beginners don't land on raw Sanskrit. Remembered per-chant.</p>
 
   <div class="phones">
     <div>
@@ -689,7 +740,7 @@
                 <div class="mode-tile study default">
                   <div class="ic">📘</div>
                   <div class="t1">Study</div>
-                  <div class="t2">Sanskrit + all languages + meaning, verse by verse</div>
+                  <div class="t2">All languages + meaning, verse by verse</div>
                   <div class="rec-pill">Recommended</div>
                 </div>
                 <div class="mode-tile chant">
@@ -702,16 +753,16 @@
           </div>
         </div>
       </div>
-      <div class="caption">Bottom sheet on first open · per-stotra memory · Study as recommended default.</div>
+      <div class="caption">Bottom sheet · per-chant memory · Study recommended.</div>
     </div>
   </div>
 </section>
 
-<!-- ============== STUDY MODE ============== -->
+<!-- ========== STUDY MODE ========== -->
 <section class="flow" id="study">
-  <span class="tag">Mode A</span>
-  <h2><span class="step-num">4</span>Study mode · learn the meaning</h2>
-  <p class="lead">Verse-by-verse. All scripts available via the language pill row. Translation + meaning shown below each verse. Mode toggle stays visible so a user who came to study can switch mid-session to chanting.</p>
+  <span class="tag neutral">Mode A</span>
+  <h2>Study mode · learn the meaning</h2>
+  <p class="lead">Verse-by-verse. All scripts available via the language pill row. Translation and meaning below each verse. Mode toggle at top for mid-session switching.</p>
 
   <div class="phones">
     <div>
@@ -720,8 +771,8 @@
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
           <div class="app-header has-back">
             <span class="back">‹</span>
-            <div><div class="title">Bhaja Govindam</div><div class="subtitle">Adi Shankaracharya · Vedanta</div></div>
-            <span style="margin-left: auto; color: var(--saffron); font-size: 18px;">♡</span>
+            <div><div class="title">Bhaja Govindam</div><div class="subtitle">Adi Shankaracharya</div></div>
+            <span class="trailing" style="color: var(--saffron);">♡</span>
           </div>
           <div class="mode-toggle"><div class="seg active">📘 Study</div><div class="seg">✦ Chant</div></div>
           <div class="lang-switch">
@@ -735,7 +786,6 @@
             <div class="verse-block">
               <div class="vn">Verse 1</div>
               <div class="sanskrit">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।<br/>सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
-              <div class="translit">bhaja govindaṃ bhaja govindaṃ, govindaṃ bhaja mūḍhamate…</div>
               <div class="meaning">Worship Govinda. When the appointed time of death comes, grammar rules will not save you.</div>
             </div>
             <div class="verse-block">
@@ -746,16 +796,16 @@
           </div>
         </div>
       </div>
-      <div class="caption">All scripts · verse-by-verse · meanings · heart-favorite. Mode toggle stays at top.</div>
+      <div class="caption">All scripts · verse-by-verse · meaning · favorite heart.</div>
     </div>
   </div>
 </section>
 
-<!-- ============== CHANT MODE ============== -->
+<!-- ========== CHANT MODE ========== -->
 <section class="flow" id="chant">
-  <span class="tag">Mode B</span>
-  <h2><span class="step-num">5</span>Chant mode · full-bleed teleprompter</h2>
-  <p class="lead">Tab bar hidden. No translations, no meaning, no verse headers. One script only (picked at entry). Giant text, continuous scroll with optional auto-scroll. Dark theme for pre-dawn chanting. Corner close + font-size stepper are the only chrome.</p>
+  <span class="tag neutral">Mode B</span>
+  <h2>Chant mode · full-bleed teleprompter</h2>
+  <p class="lead">Tab bar hidden. No translations, no verse headers. One script only. Giant text, continuous scroll with auto-scroll. Dark for pre-dawn chanting. Only chrome: corner close, font size, language pill.</p>
 
   <div class="phones">
     <div>
@@ -784,51 +834,7 @@
           </div>
         </div>
       </div>
-      <div class="caption"><b>Tab bar hidden</b> · no verse numbers · giant Devanagari · auto-scroll pauses on call/alarm. Dark for low-light.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== ENGINEERING NOTES ============== -->
-<section class="eng-notes" id="eng">
-  <h3>Engineering notes (from the mobile review)</h3>
-  <div class="grid">
-    <div class="item">
-      <h4>iOS placement</h4>
-      New <code>JAChantLibraryViewController</code> pushed from Home card. <b>Do not</b> touch <code>JAMantraGroupViewController</code> — its binary segment state and server-dict datasource can't carry SQLite chants cleanly.
-    </div>
-    <div class="item">
-      <h4>Android placement</h4>
-      New <code>ChantLibraryActivity</code> (or fragment if nav-component-based) launched from <code>HomeFragment</code>. Parallel <code>chants/</code> package to <code>mantras/</code>. Leave <code>MantrasParentFragment</code> untouched.
-    </div>
-    <div class="item">
-      <h4>Chant mode rendering</h4>
-      iOS: <code>UITableView</code> + <code>UITextView</code> (not UILabel — TextKit handles long Devanagari ligatures; UILabel's CoreText chokes). Auto-sized cells.<br/>
-      Android: <code>RecyclerView</code> + <code>setHasStableIds(true)</code>, single VH type. Avoid NestedScrollView.
-    </div>
-    <div class="item">
-      <h4>Auto-scroll interruption</h4>
-      iOS: <code>AVAudioSession.interruptionNotification</code>. Android: <code>AudioManager.OnAudioFocusChangeListener</code>. Pause on transient loss, resume on gain.
-    </div>
-    <div class="item">
-      <h4>Storage</h4>
-      Bundle <b>per-script SQLite</b>: Sanskrit ships in-app (~30MB). Hindi / Tamil / IAST download on first language switch (~10–30MB each). OTA deltas via CDN. Net binary bump ~25–35MB.
-    </div>
-    <div class="item">
-      <h4>Deep linking</h4>
-      <code>japa108://stotra/:slug</code> resolves through a coordinator → pushes <code>ChantDetailViewController</code>. Clean because the library is its own stack.
-    </div>
-    <div class="item">
-      <h4>Fonts</h4>
-      Noto Sans Devanagari + Noto Sans Tamil (SIL OFL — safe to bundle). iOS ≥ 13 renders Devanagari natively; Android pre-API 26 quality varies — bundle Noto to guarantee it.
-    </div>
-    <div class="item">
-      <h4>Accessibility</h4>
-      <code>accessibilityLanguage = "sa"</code> on Sanskrit labels (iOS) / <code>android:textLocale="sa"</code> — otherwise VoiceOver / TalkBack reads Devanagari as English phonemes. Clamp Dynamic Type in chant mode.
-    </div>
-    <div class="item">
-      <h4>Localization</h4>
-      Translations are <b>data rows in SQLite</b>, not <code>Localizable.strings</code>. 1,162 chants × 4 scripts is content, versioned with the DB — not the app bundle.
+      <div class="caption"><b>Tab bar hidden</b> · minimal chrome · giant Devanagari · dark for low light.</div>
     </div>
   </div>
 </section>
@@ -836,8 +842,8 @@
 </main>
 
 <footer>
-  <p>Mockup only · visual and structural plan, not final UI.<br/>
-  Design language, IA, and engineering constraints verified against the real <a href="https://github.com/Pradeepgman/Japa108-iOS" target="_blank">Japa108-iOS</a> and <a href="https://github.com/Pradeepgman/japa108-android" target="_blank">japa108-android</a> codebases.<br/>
+  <p>Mockup only · visual plan, not final UI. Icons approximated from real <code>Tab/startBubble.imageset</code>, <code>Tab/home.imageset</code>, <code>Tab/mantra.imageset</code>, <code>Tab/community.imageset</code>.<br/>
+  Design language verified against <a href="https://github.com/Pradeepgman/Japa108-iOS" target="_blank">Japa108-iOS</a> and <a href="https://github.com/Pradeepgman/japa108-android" target="_blank">japa108-android</a>.<br/>
   Content source: <a href="https://japachants.siddha.pro/" target="_blank">japachants.siddha.pro</a></p>
 </footer>
 
