@@ -4,562 +4,815 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Japa Chants × Japa108 — integration mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Noto+Serif+Tamil:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0a1e;
-    --bg2: #1a1035;
-    --ink: #f3efe6;
-    --muted: #b0a8c7;
-    --saffron: #f7931e;
-    --saffron-soft: #f7b259;
-    --maroon: #8b1e3f;
-    --gold: #d4a24a;
-    --card: #14102a;
-    --card-border: #2a2050;
-    --ok: #4ade80;
-    --warn: #fbbf24;
+    --gold:        #eebf33;
+    --saffron:     #FF8E00;
+    --tab-active:  #ff8124;
+    --tab-inactive:#818486;
+    --orange-1:    #ff6c00;
+    --orange-2:    #F1A22C;
+    --brown-1:     #bc7922;
+    --brown-2:     #e2a729;
+    --cream-bg:    #FFF6E3;
+    --cream-card:  #fffcf2;
+    --page-bg:     #f9f6f1;
+    --divider:     #E3E3E3;
+    --ink-dark:    #343333;
+    --ink-med:     #5d5d5d;
+    --ink-light:   #939393;
+    --white:       #ffffff;
+    --ok:          #16a34a;
+    --chant-dark:  #1a0f00;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: radial-gradient(1200px 800px at 10% -10%, #2a1055 0%, transparent 55%),
-                radial-gradient(1000px 700px at 110% 20%, #5a1030 0%, transparent 55%),
-                linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background:
+      radial-gradient(900px 600px at 90% -10%, rgba(255, 142, 0, 0.14) 0%, transparent 55%),
+      radial-gradient(800px 500px at -10% 110%, rgba(238, 191, 51, 0.12) 0%, transparent 55%),
+      linear-gradient(180deg, var(--page-bg) 0%, #f3ecdd 100%);
+    color: var(--ink-dark);
     min-height: 100vh;
-    line-height: 1.5;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  header {
-    padding: 48px 24px 16px;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  header { padding: 56px 24px 24px; text-align: center; max-width: 860px; margin: 0 auto; }
   header .eyebrow {
-    display: inline-block;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--saffron);
-    padding: 4px 12px;
-    border: 1px solid rgba(247, 147, 30, 0.35);
-    border-radius: 999px;
-    margin-bottom: 16px;
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--saffron);
+    padding: 5px 14px; background: rgba(255, 142, 0, 0.08);
+    border: 1px solid rgba(255, 142, 0, 0.3); border-radius: 999px; margin-bottom: 20px;
   }
-  header h1 {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 700;
-    margin: 0 0 12px;
-    letter-spacing: -0.02em;
+  header h1 { font-size: clamp(30px, 4.5vw, 46px); font-weight: 700; margin: 0 0 14px; letter-spacing: -0.025em; }
+  header h1 .accent {
+    background: linear-gradient(90deg, var(--orange-1), var(--orange-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  header .sub {
-    color: var(--muted);
-    font-size: 16px;
-    max-width: 640px;
-    margin: 0 auto 8px;
-  }
+  header .sub { color: var(--ink-med); font-size: 17px; max-width: 640px; margin: 0 auto 20px; }
   header .stats {
-    display: inline-flex;
-    gap: 24px;
-    margin-top: 16px;
-    padding: 10px 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    font-size: 13px;
-    color: var(--muted);
+    display: inline-flex; gap: 22px; flex-wrap: wrap; justify-content: center;
+    margin-top: 18px; padding: 12px 20px; background: var(--white);
+    border: 1px solid var(--divider); border-radius: 14px;
+    font-size: 13px; color: var(--ink-med); box-shadow: 0 4px 20px rgba(238, 191, 51, 0.1);
   }
-  header .stats b { color: var(--saffron-soft); font-variant-numeric: tabular-nums; }
+  header .stats b { color: var(--saffron); font-weight: 700; font-variant-numeric: tabular-nums; }
+  header .stats span + span { padding-left: 22px; border-left: 1px solid var(--divider); }
 
-  .section-nav {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    padding: 24px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: linear-gradient(180deg, rgba(13,10,30,0.95) 0%, rgba(13,10,30,0.8) 100%);
-    backdrop-filter: blur(8px);
+  nav.section-nav {
+    display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
+    padding: 20px 16px; position: sticky; top: 0; z-index: 20;
+    background: rgba(249, 246, 241, 0.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(227, 227, 227, 0.6);
   }
-  .section-nav a {
-    color: var(--ink);
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    font-size: 13px;
-    transition: all 0.2s;
+  nav.section-nav a {
+    color: var(--ink-med); text-decoration: none; padding: 8px 14px;
+    border-radius: 999px; border: 1px solid transparent; font-size: 13px; font-weight: 500;
   }
-  .section-nav a:hover { background: rgba(247, 147, 30, 0.15); border-color: var(--saffron); }
+  nav.section-nav a:hover { background: var(--cream-card); border-color: var(--divider); color: var(--ink-dark); }
+  nav.section-nav a.rec { color: var(--saffron); border-color: rgba(255, 142, 0, 0.25); background: rgba(255, 142, 0, 0.05); }
 
-  main { padding: 8px 16px 80px; max-width: 1280px; margin: 0 auto; }
+  main { padding: 8px 16px 80px; max-width: 1360px; margin: 0 auto; }
 
   section.option {
-    margin: 48px 0;
-    padding: 32px 20px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 24px;
+    margin: 56px 0; padding: 36px 24px 40px; background: var(--white);
+    border: 1px solid var(--divider); border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(90, 65, 20, 0.05);
   }
   section.option.featured {
-    border-color: rgba(247, 147, 30, 0.4);
-    background: linear-gradient(180deg, rgba(247, 147, 30, 0.04) 0%, rgba(255, 255, 255, 0.02) 60%);
+    border-color: rgba(255, 142, 0, 0.35);
+    background: linear-gradient(180deg, rgba(255, 246, 227, 0.7) 0%, var(--white) 55%);
+    box-shadow: 0 14px 50px rgba(255, 142, 0, 0.1);
   }
   section.option .tag {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 999px;
-    margin-bottom: 12px;
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
   }
-  .tag.baseline  { background: rgba(255, 255, 255, 0.08); color: var(--muted); }
-  .tag.a         { background: rgba(156, 163, 175, 0.15); color: #d1d5db; }
-  .tag.b         { background: rgba(247, 147, 30, 0.2);   color: var(--saffron); }
-  .tag.c         { background: rgba(139, 92, 246, 0.2);   color: #c4b5fd; }
-  .tag.rec       { background: var(--saffron); color: #1a0f00; margin-left: 8px; }
+  .tag.baseline { background: #ecebe6; color: var(--ink-med); }
+  .tag.a        { background: #e8e8e8; color: #555; }
+  .tag.b        { background: linear-gradient(90deg, var(--orange-1), var(--orange-2)); color: white; }
+  .tag.c        { background: #fef3c7; color: #a16207; }
+  .tag.rec      { background: var(--tab-active); color: white; margin-left: 6px; }
+  .tag.time     { background: transparent; color: var(--ink-light); border: 1px solid var(--divider); margin-left: 8px; font-weight: 500; letter-spacing: 0.08em; }
+  .tag.modes    { background: var(--chant-dark); color: var(--saffron); margin-left: 6px; }
 
-  section.option h2 {
-    font-size: clamp(22px, 3vw, 30px);
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  section.option .lead {
-    color: var(--muted);
-    font-size: 15px;
-    max-width: 720px;
-    margin: 0 0 28px;
-  }
+  section.option h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 10px; font-weight: 700; letter-spacing: -0.015em; }
+  section.option .lead { color: var(--ink-med); font-size: 15.5px; max-width: 760px; margin: 0 0 28px; }
 
   .phones {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    justify-items: center;
-    margin-top: 16px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 28px; justify-items: center; margin-top: 20px;
   }
 
+  /* Dual-mode callout box */
+  .mode-callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0 12px;
+    padding: 20px;
+    background: var(--cream-bg);
+    border: 1px solid rgba(238, 191, 51, 0.4);
+    border-radius: 16px;
+  }
+  .mode-callout .mode {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .mode-callout .mode .mk {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mode-callout .mode.study .mk { background: var(--white); border: 1px solid var(--divider); color: var(--ink-dark); }
+  .mode-callout .mode.chant .mk { background: var(--chant-dark); color: var(--saffron); }
+  .mode-callout .mode .txt { flex: 1; }
+  .mode-callout .mode .t1 { font-size: 13px; font-weight: 700; color: var(--ink-dark); }
+  .mode-callout .mode .t2 { font-size: 12px; color: var(--ink-med); margin-top: 3px; line-height: 1.55; }
+  @media (max-width: 640px) { .mode-callout { grid-template-columns: 1fr; } }
+
+  /* ========== PHONE ========== */
   .phone {
-    width: 280px;
-    border-radius: 42px;
-    background: #0a0715;
-    padding: 10px;
-    border: 2px solid #2a2050;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    width: 288px; border-radius: 44px;
+    background: #1a1a1a; padding: 8px; border: 1px solid #2a2a2a;
+    box-shadow: 0 24px 60px rgba(50, 30, 0, 0.25), 0 6px 18px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(255, 255, 255, 0.04);
     position: relative;
   }
   .phone::before {
-    content: "";
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 24px;
-    border-radius: 12px;
-    background: #0a0715;
-    z-index: 3;
+    content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 88px; height: 24px; border-radius: 12px; background: #1a1a1a; z-index: 4;
   }
   .phone .screen {
-    background: #faf7f0;
-    color: #1a1a1a;
-    border-radius: 34px;
-    height: 560px;
-    padding: 48px 0 0;
-    overflow: hidden;
-    position: relative;
+    background: var(--cream-bg); color: var(--ink-dark);
+    border-radius: 36px; height: 600px; padding-top: 46px;
+    overflow: hidden; position: relative; display: flex; flex-direction: column;
   }
-  .phone.dark .screen { background: #0f0822; color: #f0ebe0; }
-
-  .screen .statusbar {
-    position: absolute;
-    top: 12px;
-    left: 24px;
-    right: 24px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: #888;
-    z-index: 2;
+  .phone .statusbar {
+    position: absolute; top: 14px; left: 26px; right: 26px;
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 600; color: var(--ink-dark); z-index: 5;
   }
-  .phone.dark .statusbar { color: #888; }
 
   .screen .app-header {
-    padding: 12px 20px 16px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 14px 20px; background: var(--white); border-bottom: 1px solid var(--divider); flex-shrink: 0;
   }
-  .phone.dark .app-header { border-bottom-color: rgba(255,255,255,0.06); }
-  .screen .app-header .title { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
-  .screen .app-header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
+  .screen .app-header.has-back { display: flex; align-items: center; gap: 12px; }
+  .screen .app-header .back { font-size: 18px; color: var(--ink-dark); }
+  .screen .app-header .title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .screen .app-header .subtitle { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
 
-  .scroll { padding: 12px 0 20px; height: calc(100% - 60px); overflow-y: auto; }
-
-  .list-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+  /* Mode toggle (pill segmented control) */
+  .mode-toggle {
+    display: flex; margin: 12px 16px;
+    background: var(--cream-bg); border-radius: 999px; padding: 3px;
+    border: 1px solid var(--divider); flex-shrink: 0;
   }
-  .list-item:last-child { border-bottom: none; }
-  .phone.dark .list-item { border-bottom-color: rgba(255,255,255,0.04); }
-  .list-item .ic {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--saffron), var(--maroon));
-    color: white; font-size: 13px; font-weight: 700;
+  .mode-toggle .seg {
+    flex: 1; text-align: center; padding: 7px 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+    color: var(--ink-light); border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .mode-toggle .seg.active { background: var(--white); color: var(--ink-dark); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .mode-toggle .seg.active.saffron { background: var(--saffron); color: white; box-shadow: 0 2px 6px rgba(255,142,0,0.35); }
+
+  .top-tabs {
+    display: flex; background: var(--white); border-bottom: 1px solid var(--divider);
+    font-size: 12px; font-weight: 500; flex-shrink: 0;
+  }
+  .top-tabs .tt { flex: 1; text-align: center; padding: 10px 4px 12px; color: #c8c8c8; position: relative; }
+  .top-tabs .tt.active { color: var(--saffron); font-weight: 600; }
+  .top-tabs .tt.active::after {
+    content: ""; position: absolute; left: 24%; right: 24%; bottom: 0;
+    height: 2px; background: var(--saffron); border-radius: 2px;
+  }
+
+  .scroll { flex: 1; overflow-y: auto; background: var(--white); }
+  .scroll.cream { background: var(--cream-bg); }
+
+  .mantra-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px; border-bottom: 1px solid var(--divider); background: var(--white);
+  }
+  .mantra-row:last-child { border-bottom: none; }
+  .mantra-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, #fac95f 0%, #ff950f 100%);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    color: white; font-size: 18px; font-weight: 700; flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(255, 149, 15, 0.3);
+    border: 2px solid var(--white); box-sizing: content-box;
   }
-  .list-item .txt { flex: 1; min-width: 0; }
-  .list-item .t1 { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .list-item .t2 { font-size: 11px; color: #888; margin-top: 1px; }
+  .mantra-circle.brown { background: linear-gradient(135deg, #e2a729, #bc7922); }
+  .mantra-circle.gold  { background: linear-gradient(135deg, #f7d063, #eebf33); }
+  .mantra-row .txt { flex: 1; min-width: 0; }
+  .mantra-row .t1 { font-size: 14px; font-weight: 600; color: var(--ink-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mantra-row .t2 { font-size: 11.5px; color: var(--ink-light); margin-top: 2px; }
+  .mantra-row .chev { color: #bbb; font-size: 14px; }
 
   .group-header {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #999;
-    padding: 12px 20px 4px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-light);
+    padding: 16px 18px 6px; background: var(--cream-bg); border-bottom: 1px solid var(--divider);
   }
-  .phone.dark .group-header { color: #777; }
+
+  /* Counter screen */
+  .counter-screen {
+    background: linear-gradient(165deg, var(--orange-1) 0%, var(--orange-2) 100%);
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    padding: 24px 20px 20px; position: relative;
+  }
+  .counter-screen .mantra-pic {
+    width: 84px; height: 84px; border-radius: 50%; background: var(--white);
+    padding: 5px; margin-bottom: 10px;
+  }
+  .counter-screen .mantra-pic .inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg, #fac95f, #ff950f);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 22px; font-weight: 700;
+  }
+  .counter-screen .mantra-title { color: white; font-size: 14px; font-weight: 600; }
+  .counter-screen .mantra-desc { color: rgba(255,255,255,0.85); font-size: 11px; margin-top: 2px; }
+  .counter-screen .counter-num {
+    color: white; font-size: 88px; font-weight: 200;
+    font-variant-numeric: tabular-nums; margin-top: 24px;
+    text-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3); line-height: 1;
+  }
+  .counter-screen .bead-dots { color: rgba(255,255,255,0.65); font-size: 13px; margin-top: 16px; letter-spacing: 0.15em; }
+  .counter-screen .hold-text {
+    position: absolute; bottom: 20px; left: 0; right: 0;
+    text-align: center; color: rgba(255,255,255,0.7); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
 
   .home-tile {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; background: var(--white); position: relative;
   }
-  .phone.dark .home-tile { border-bottom-color: rgba(255,255,255,0.05); }
-  .home-tile .tile-ic { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .home-tile .tile-txt .t1 { font-size: 15px; font-weight: 600; }
-  .home-tile .tile-txt .t2 { font-size: 12px; color: #888; }
-  .home-tile.new { background: linear-gradient(90deg, rgba(247,147,30,0.08), transparent); }
-  .home-tile.new::after { content: "NEW"; font-size: 9px; font-weight: 700; color: var(--saffron); letter-spacing: 0.1em; margin-left: auto; padding: 2px 6px; border: 1px solid var(--saffron); border-radius: 4px; }
-
-  .counter-big {
-    text-align: center;
-    padding: 50px 20px 40px;
-  }
-  .counter-big .mala {
-    width: 170px; height: 170px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff 0%, var(--saffron-soft) 40%, var(--saffron) 70%, var(--maroon) 100%);
-    margin: 0 auto 20px;
+  .home-tile .tile-ic {
+    width: 40px; height: 40px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 48px; font-weight: 800; color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    font-variant-numeric: tabular-nums;
+    font-size: 18px; flex-shrink: 0;
   }
-  .counter-big .mantra-name { font-size: 14px; color: #666; }
-  .phone.dark .counter-big .mantra-name { color: #aaa; }
-  .counter-big .mantra-script { font-size: 18px; font-weight: 600; margin-top: 4px; }
+  .home-tile .t1 { font-size: 14px; font-weight: 600; }
+  .home-tile .t2 { font-size: 11px; color: var(--ink-light); margin-top: 1px; }
+  .home-tile.new { background: linear-gradient(90deg, rgba(255, 142, 0, 0.06) 0%, var(--white) 50%); }
+  .home-tile .new-pill {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    background: var(--saffron); color: white;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+    padding: 3px 7px; border-radius: 4px;
+  }
+  .home-tile .chev { margin-left: auto; color: #bbb; font-size: 14px; }
+
+  .bottom-tabs {
+    display: flex; background: var(--white); border-top: 1px solid var(--divider);
+    height: 60px; flex-shrink: 0;
+  }
+  .bottom-tabs .bt {
+    flex: 1; text-align: center; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 2px;
+    font-size: 10px; font-weight: 500; color: var(--tab-inactive);
+  }
+  .bottom-tabs .bt .ico { font-size: 18px; }
+  .bottom-tabs .bt.active { color: var(--tab-active); }
 
   .webview-chrome {
-    background: #e5e5e5; padding: 8px 16px; font-size: 10px; color: #555;
+    background: #e8e8e8; padding: 8px 14px; display: flex; align-items: center; gap: 10px;
+    font-size: 11px; color: #555; border-bottom: 1px solid #d0d0d0; flex-shrink: 0;
+  }
+  .webview-chrome .u { flex: 1; background: white; padding: 4px 10px; border-radius: 999px; font-size: 10px; text-align: center; }
+
+  /* ========== STUDY MODE reader ========== */
+  .chant-reader { background: var(--white); flex: 1; overflow-y: auto; }
+  .chant-reader .chant-meta { padding: 18px 22px 14px; text-align: center; border-bottom: 1px solid var(--divider); }
+  .chant-reader .chant-meta .ornament { display: block; font-size: 16px; color: var(--saffron); margin-bottom: 6px; letter-spacing: 0.4em; }
+  .chant-reader .chant-meta .tt { font-size: 17px; font-weight: 700; color: var(--ink-dark); }
+  .chant-reader .chant-meta .dt {
+    font-size: 10px; color: var(--ink-light); margin-top: 6px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+  }
+
+  .lang-switch {
+    display: flex; gap: 6px; justify-content: center;
+    padding: 10px 14px; background: var(--cream-bg);
+    border-bottom: 1px solid var(--divider); overflow-x: auto; flex-shrink: 0;
+  }
+  .lang-switch .pill {
+    font-size: 11px; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--divider); background: var(--white);
+    color: var(--ink-med); font-weight: 500; white-space: nowrap; flex-shrink: 0;
+  }
+  .lang-switch .pill.active { background: var(--saffron); color: white; border-color: var(--saffron); font-weight: 600; }
+
+  .verse-block { padding: 16px 22px; border-bottom: 1px solid var(--divider); }
+  .verse-block .vn {
+    font-size: 9.5px; color: var(--ink-light); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .verse-block .sanskrit {
+    font-family: "Noto Serif Devanagari", serif;
+    font-size: 16px; line-height: 1.75; color: var(--ink-dark); font-weight: 500;
+  }
+  .verse-block .translit {
+    font-size: 12.5px; line-height: 1.6; color: var(--ink-med);
+    font-style: italic; margin-top: 8px;
+  }
+  .verse-block .meaning {
+    font-size: 12px; line-height: 1.55; color: var(--ink-med);
+    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--divider);
+  }
+
+  /* ========== CHANT MODE reader (dark, minimal) ========== */
+  .chant-mode {
+    background: var(--chant-dark);
+    flex: 1; overflow-y: auto; position: relative;
+    padding: 20px 22px 60px;
+  }
+  .chant-mode::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40px;
+    background: linear-gradient(180deg, var(--chant-dark), transparent); z-index: 2; pointer-events: none;
+  }
+  .chant-mode::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+    background: linear-gradient(0deg, var(--chant-dark), transparent); z-index: 2; pointer-events: none;
+  }
+  .chant-mode .big {
+    font-family: "Noto Serif Devanagari", serif;
+    font-size: 26px; line-height: 1.9; color: #fff8e9; font-weight: 500;
+    letter-spacing: 0.01em; margin-bottom: 28px;
+  }
+  .chant-mode .big.fade-top { opacity: 0.35; }
+  .chant-mode .big.active { color: var(--saffron); text-shadow: 0 0 20px rgba(255, 142, 0, 0.3); }
+  .chant-mode .progress {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600;
+    z-index: 3;
+  }
+  .chant-mode .scroll-hint {
+    position: absolute; bottom: 18px; left: 0; right: 0;
+    text-align: center; color: rgba(255, 255, 255, 0.35); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; z-index: 3;
+  }
+  .chant-mode .chant-mode-header {
+    position: absolute; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; z-index: 4;
+  }
+  .chant-mode .chant-mode-header .back { color: rgba(255,255,255,0.6); font-size: 18px; }
+  .chant-mode .chant-mode-header .lang-pill {
+    color: var(--saffron); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 9px; border: 1px solid rgba(255, 142, 0, 0.4); border-radius: 999px;
+  }
+
+  /* Search */
+  .searchbar { padding: 10px 16px; background: var(--white); border-bottom: 1px solid var(--divider); flex-shrink: 0; }
+  .searchbar .input {
+    background: var(--cream-bg); padding: 8px 12px; border-radius: 10px;
+    font-size: 12px; color: var(--ink-light);
     display: flex; align-items: center; gap: 8px;
-    border-bottom: 1px solid #ccc;
   }
-  .webview-chrome .url { flex: 1; background: #fff; padding: 4px 10px; border-radius: 999px; font-size: 10px; }
 
-  .chant-reader { padding: 18px 20px 24px; }
-  .chant-reader .title-line { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-  .chant-reader .deity-line { font-size: 11px; color: #888; margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
-  .chant-reader .verse { font-size: 17px; line-height: 1.7; font-family: "Noto Serif", Georgia, serif; margin-bottom: 12px; }
-  .chant-reader .verse.sanskrit { color: var(--maroon); }
-  .phone.dark .chant-reader .verse.sanskrit { color: var(--saffron-soft); }
-  .chant-reader .verse.trans { font-size: 14px; color: #666; font-style: italic; }
-  .phone.dark .chant-reader .verse.trans { color: #aaa; }
-  .chant-reader .lang-switch {
-    display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+  /* Favorites banner */
+  .fav-banner {
+    padding: 12px 16px; background: linear-gradient(90deg, rgba(255, 142, 0, 0.08), rgba(238, 191, 51, 0.05));
+    border-bottom: 1px solid var(--divider); display: flex; align-items: center; gap: 10px;
+    font-size: 11.5px; flex-shrink: 0;
   }
-  .chant-reader .lang-switch button {
-    font-size: 11px; padding: 5px 10px; border-radius: 999px; border: 1px solid #ddd; background: transparent; color: #666; cursor: pointer;
-  }
-  .chant-reader .lang-switch button.active { background: var(--maroon); color: white; border-color: var(--maroon); }
-  .phone.dark .chant-reader .lang-switch button { border-color: #333; color: #aaa; }
-  .phone.dark .chant-reader .lang-switch button.active { background: var(--saffron); color: #1a0f00; border-color: var(--saffron); }
+  .fav-banner .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--saffron); animation: pulse 2s infinite; flex-shrink: 0; }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+  .fav-banner .text { flex: 1; color: var(--ink-med); }
+  .fav-banner .text b { color: var(--ink-dark); }
 
-  .fab {
-    position: absolute; bottom: 22px; left: 20px; right: 20px;
-    padding: 14px; border-radius: 14px;
-    background: linear-gradient(90deg, var(--saffron), var(--maroon));
-    color: white; font-weight: 600; text-align: center; font-size: 14px;
-    box-shadow: 0 8px 24px rgba(139, 30, 63, 0.4);
-  }
+  .caption { text-align: center; margin-top: 14px; color: var(--ink-light); font-size: 12.5px; max-width: 290px; line-height: 1.5; }
+  .caption b { color: var(--saffron); font-weight: 700; }
 
   .web-browser {
-    width: 340px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255,255,255,0.1);
+    width: 380px; border-radius: 14px; overflow: hidden;
+    background: white; box-shadow: 0 20px 50px rgba(50, 30, 0, 0.15);
+    border: 1px solid var(--divider);
   }
   .web-browser .chrome-bar {
-    background: #e8e8e8;
-    padding: 8px 12px;
-    display: flex; align-items: center; gap: 8px;
-    border-bottom: 1px solid #ccc;
+    background: #f0eee8; padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #d8d4c8;
   }
-  .web-browser .chrome-bar .dots { display: flex; gap: 4px; }
+  .web-browser .chrome-bar .dots { display: flex; gap: 5px; }
   .web-browser .chrome-bar .dots span { width: 10px; height: 10px; border-radius: 50%; }
   .web-browser .chrome-bar .dots span:nth-child(1) { background: #ff5f56; }
   .web-browser .chrome-bar .dots span:nth-child(2) { background: #ffbd2e; }
   .web-browser .chrome-bar .dots span:nth-child(3) { background: #27c93f; }
-  .web-browser .chrome-bar .url { flex: 1; background: white; padding: 3px 10px; border-radius: 6px; font-size: 11px; color: #555; }
-  .web-browser .page { padding: 24px; color: #333; min-height: 320px; }
-  .web-browser .page h3 { margin: 0 0 4px; font-size: 20px; color: #111; }
-  .web-browser .page .h-sub { font-size: 13px; color: #888; margin-bottom: 24px; }
-  .web-browser .page .counter-row {
-    display: flex; align-items: center; gap: 16px;
-    padding: 20px; border: 1px solid #eee; border-radius: 12px;
-    background: linear-gradient(135deg, #fff8ee, #fff);
+  .web-browser .chrome-bar .url { flex: 1; background: white; padding: 4px 12px; border-radius: 6px; font-size: 11px; color: #555; }
+  .web-browser .page { padding: 24px; min-height: 340px; }
+  .web-browser .page .brand { font-size: 19px; font-weight: 700; color: var(--saffron); letter-spacing: -0.02em; }
+  .web-browser .page .welcome { font-size: 13px; color: var(--ink-light); margin: 2px 0 20px; }
+  .web-browser .page .signed { float: right; font-size: 11.5px; color: var(--ink-med); background: var(--cream-bg); padding: 6px 12px; border-radius: 999px; }
+  .web-browser .page .saved-card {
+    background: linear-gradient(135deg, #fffbef, white);
+    border: 1px solid var(--divider); border-radius: 12px; padding: 18px; margin-bottom: 12px;
   }
-  .web-browser .page .counter-row .num { font-size: 42px; font-weight: 800; color: var(--maroon); font-variant-numeric: tabular-nums; }
-  .web-browser .page .counter-row .lab { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.1em; }
-  .web-browser .page .sync { font-size: 12px; color: var(--ok); margin-top: 12px; display: flex; align-items: center; gap: 6px; }
-  .web-browser .page .signed-in { float: right; font-size: 12px; color: #666; background: #f5f5f5; padding: 6px 10px; border-radius: 999px; }
-
-  .caption { text-align: center; margin-top: 14px; color: var(--muted); font-size: 13px; max-width: 280px; }
+  .web-browser .page .saved-card .lbl {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+  }
+  .web-browser .page .saved-card .t1 { font-size: 16px; font-weight: 700; color: var(--ink-dark); }
+  .web-browser .page .saved-card .t2 { font-size: 12px; color: var(--ink-light); margin-top: 4px; }
+  .web-browser .page .sync { margin-top: 12px; color: var(--ok); font-size: 11.5px; display: flex; align-items: center; gap: 6px; }
 
   .compare {
-    margin: 60px 0 0;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    overflow-x: auto;
+    margin: 64px 0 0; padding: 32px 24px;
+    background: var(--white); border: 1px solid var(--divider); border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(90, 65, 20, 0.05); overflow-x: auto;
   }
-  .compare h2 { margin-top: 0; font-size: 22px; }
-  table.compare-tbl {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    min-width: 500px;
-  }
-  table.compare-tbl th, table.compare-tbl td {
-    padding: 12px 10px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  table.compare-tbl th { font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .compare h2 { margin: 0 0 20px; font-size: 24px; font-weight: 700; }
+  table.compare-tbl { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 600px; }
+  table.compare-tbl th, table.compare-tbl td { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--divider); }
+  table.compare-tbl th { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
   table.compare-tbl .yes { color: var(--ok); font-weight: 600; }
-  table.compare-tbl .no { color: #666; }
-  table.compare-tbl tr.featured td { background: rgba(247, 147, 30, 0.06); }
-  table.compare-tbl tr.featured td:first-child { color: var(--saffron); font-weight: 600; }
+  table.compare-tbl .no  { color: var(--ink-light); }
+  table.compare-tbl tr.featured td { background: rgba(255, 142, 0, 0.05); }
+  table.compare-tbl tr.featured td:first-child { color: var(--saffron); font-weight: 700; }
 
-  footer {
-    text-align: center;
-    padding: 32px 16px 48px;
-    color: var(--muted);
-    font-size: 12px;
-  }
-  footer a { color: var(--saffron); text-decoration: none; }
+  footer { text-align: center; padding: 40px 20px 60px; color: var(--ink-light); font-size: 12.5px; }
+  footer a { color: var(--saffron); text-decoration: none; font-weight: 500; }
 
   @media (max-width: 640px) {
     .phone, .web-browser { width: 100%; max-width: 340px; }
     .phones { grid-template-columns: 1fr; }
-    header { padding: 32px 16px 8px; }
-    section.option { padding: 24px 16px; margin: 32px 0; }
+    header { padding: 40px 16px 12px; }
+    section.option { padding: 28px 18px 32px; margin: 36px 0; }
+    header .stats span + span { padding-left: 0; border-left: none; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <span class="eyebrow">Japa Chants ↔ Japa108</span>
-  <h1>Bringing 1,162 chants into the mobile app</h1>
-  <p class="sub">Three ways to connect japachants.siddha.pro with the iOS &amp; Android apps. Tap each phone to imagine the flow.</p>
+  <span class="eyebrow">Japa Chants × Japa108</span>
+  <h1>Bringing <span class="accent">1,162 chants</span> into the iOS &amp; Android app</h1>
+  <p class="sub">Chants are a <em>reading</em> experience — separate from the mantra counter. And reading has two modes: one for studying the meaning, one for actual chanting along.</p>
   <div class="stats">
     <span><b>1,162</b> chants</span>
     <span><b>34,111</b> verses</span>
     <span><b>25</b> deities</span>
-    <span><b>4</b> scripts · Sanskrit · Hindi · Tamil · IAST</span>
+    <span><b>2</b> modes</span>
   </div>
 </header>
 
 <nav class="section-nav">
   <a href="#today">Today</a>
-  <a href="#a">Option A — Link out</a>
-  <a href="#b">Option B — Native library ★</a>
-  <a href="#c">Option C — Unified account</a>
+  <a href="#modes">The two modes</a>
+  <a href="#a">Option A</a>
+  <a href="#b" class="rec">Option B ★</a>
+  <a href="#c">Option C</a>
   <a href="#compare">Compare</a>
 </nav>
 
 <main>
 
-<!-- TODAY -->
+<!-- ========== THE TWO MODES ========== -->
+<section class="option" id="modes">
+  <span class="tag b">Core principle</span><span class="tag modes">✦ Two modes</span>
+  <h2>How users read a chant</h2>
+  <p class="lead">Every chant opens in one of two modes. The mode toggle sits at the top of the chant screen. The user's preferred default (study or chant) is remembered.</p>
+
+  <div class="mode-callout">
+    <div class="mode study">
+      <div class="mk">📘</div>
+      <div class="txt">
+        <div class="t1">Study mode</div>
+        <div class="t2">Learn the meaning. See Sanskrit + transliteration + a line-by-line translation + meaning. Scholarly, verse-by-verse.</div>
+      </div>
+    </div>
+    <div class="mode chant">
+      <div class="mk">✦</div>
+      <div class="txt">
+        <div class="t1">Chant mode</div>
+        <div class="t2">Actually chant along. One script only (user picks the language). Continuous scroll, very large text, no verse chrome, minimal distraction.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phones">
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="app-header has-back"><span class="back">‹</span><div><div class="title">Bhaja Govindam</div><div class="subtitle">Adi Shankaracharya</div></div><span style="margin-left:auto; color: var(--saffron); font-size:18px;">♡</span></div>
+          <div class="mode-toggle"><div class="seg active">📘 Study</div><div class="seg">✦ Chant</div></div>
+          <div class="lang-switch">
+            <div class="pill active">संस्कृत</div><div class="pill">हिन्दी</div><div class="pill">தமிழ்</div><div class="pill">IAST</div><div class="pill">English</div>
+          </div>
+          <div class="chant-reader">
+            <div class="verse-block">
+              <div class="vn">Verse 1</div>
+              <div class="sanskrit">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।<br/>सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
+              <div class="translit">bhaja govindaṃ bhaja govindaṃ, govindaṃ bhaja mūḍhamate…</div>
+              <div class="meaning">Worship Govinda. When the appointed time comes, grammar rules will not save you.</div>
+            </div>
+            <div class="verse-block">
+              <div class="vn">Verse 2</div>
+              <div class="sanskrit">मूढ जहीहि धनागमतृष्णां<br/>कुरु सद्बुद्धिं मनसि वितृष्णाम् ॥</div>
+              <div class="meaning">Give up thirst for wealth, O fool. Cultivate pure thought…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="caption"><b>Study mode</b> · all scripts available · meaning line-by-line · verse numbers visible.</div>
+    </div>
+
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar" style="color:rgba(255,255,255,0.6);"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="chant-mode">
+            <div class="chant-mode-header">
+              <span class="back">‹</span>
+              <div class="lang-pill">संस्कृत</div>
+            </div>
+            <div class="progress">3 / 31</div>
+            <div style="height: 28px;"></div>
+            <div class="big fade-top">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।</div>
+            <div class="big fade-top">सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
+            <div class="big active">मूढ जहीहि धनागमतृष्णां<br/>कुरु सद्बुद्धिं मनसि वितृष्णाम् ।</div>
+            <div class="big">यल्लभसे निजकर्मोपात्तं<br/>वित्तं तेन विनोदय चित्तम् ॥</div>
+            <div class="scroll-hint">swipe · tap to pause auto-scroll</div>
+          </div>
+        </div>
+      </div>
+      <div class="caption"><b>Chant mode</b> · one script only · giant text · auto-scroll · minimal chrome · dark for low light.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TODAY ========== -->
 <section class="option" id="today">
   <span class="tag baseline">Today</span>
-  <h2>What users see now</h2>
-  <p class="lead">The mobile app has a short, curated mantra list. Users pick one, then count. No lyrics, no translations, no meaning. The full chant library lives only on the website.</p>
-  <div class="phones">
+  <h2>What the app looks like now</h2>
+  <p class="lead">A small curated mantra list feeds the counter. The counter is the heart — orange gradient, glowing number, circular mantra image. No chant library inside the app.</p>
 
+  <div class="phones">
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Mantras</div><div class="subtitle">Pick a mantra to begin</div></div>
+          <div class="app-header"><div class="title">Mantras</div><div class="subtitle">12 mantras</div></div>
+          <div class="top-tabs"><div class="tt active">Featured</div><div class="tt">Mine</div><div class="tt">Routines</div></div>
           <div class="scroll">
-            <div class="list-item"><div class="ic">ॐ</div><div class="txt"><div class="t1">Om Namah Shivaya</div><div class="t2">Shiva · 108 beads</div></div></div>
-            <div class="list-item"><div class="ic">ह</div><div class="txt"><div class="t1">Hare Krishna</div><div class="t2">Krishna · 108 beads</div></div></div>
-            <div class="list-item"><div class="ic">ग</div><div class="txt"><div class="t1">Gayatri Mantra</div><div class="t2">Vedic · 108 beads</div></div></div>
-            <div class="list-item"><div class="ic">श</div><div class="txt"><div class="t1">Shri Ram Jai Ram</div><div class="t2">Rama · 108 beads</div></div></div>
-            <div class="list-item"><div class="ic">ग</div><div class="txt"><div class="t1">Om Gam Ganapataye</div><div class="t2">Ganesha · 108 beads</div></div></div>
-            <div class="list-item"><div class="ic">+</div><div class="txt"><div class="t1">Add your own</div><div class="t2">Custom mantra</div></div></div>
+            <div class="mantra-row"><div class="mantra-circle">ॐ</div><div class="txt"><div class="t1">Om Namah Shivaya</div><div class="t2">Shiva · 108 repetitions</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle brown">ह</div><div class="txt"><div class="t1">Hare Krishna</div><div class="t2">Krishna · 108 repetitions</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle gold">ग</div><div class="txt"><div class="t1">Gayatri Mantra</div><div class="t2">Vedic · 108 repetitions</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle">श</div><div class="txt"><div class="t1">Shri Ram Jai Ram</div><div class="t2">Rama · 108 repetitions</div></div><span class="chev">›</span></div>
+          </div>
+          <div class="bottom-tabs">
+            <div class="bt active"><div class="ico">🕉️</div>Mantras</div>
+            <div class="bt"><div class="ico">◯</div>Counter</div>
+            <div class="bt"><div class="ico">📊</div>Insights</div>
+            <div class="bt"><div class="ico">🏆</div>Awards</div>
           </div>
         </div>
       </div>
-      <div class="caption">~12 hand-curated mantras. No text, no translations.</div>
+      <div class="caption">Mantras tab · curated list · feeds the counter.</div>
     </div>
 
     <div>
       <div class="phone">
         <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Counter</div></div>
-          <div class="counter-big">
-            <div class="mala">42</div>
-            <div class="mantra-name">Chanting</div>
-            <div class="mantra-script">Om Namah Shivaya</div>
+          <div class="statusbar" style="color:white;"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="counter-screen">
+            <div class="mantra-pic"><div class="inner">ॐ</div></div>
+            <div class="mantra-title">Om Namah Shivaya</div>
+            <div class="mantra-desc">Shiva · Round 1 of 1</div>
+            <div class="counter-num">42</div>
+            <div class="bead-dots">• 41 · 42 · 43 •</div>
+            <div class="hold-text">Hold to close</div>
           </div>
-          <div class="fab">Tap to count · long-press to undo</div>
+          <div class="bottom-tabs">
+            <div class="bt"><div class="ico">🕉️</div>Mantras</div>
+            <div class="bt active"><div class="ico">●</div>Counter</div>
+            <div class="bt"><div class="ico">📊</div>Insights</div>
+            <div class="bt"><div class="ico">🏆</div>Awards</div>
+          </div>
         </div>
       </div>
-      <div class="caption">The counter is great — but just a name, no text.</div>
+      <div class="caption">Counter · orange gradient · glowing number · stays exactly as is.</div>
     </div>
   </div>
 </section>
 
-<!-- OPTION A -->
+<!-- ========== OPTION A ========== -->
 <section class="option" id="a">
-  <span class="tag a">Option A — Link out</span>
-  <h2>Smallest step · 1–2 days</h2>
-  <p class="lead">Add a "Chant Library" tile on the home screen. Tapping it opens japachants.siddha.pro inside an in-app browser. Users can browse and read chants, but the experience feels like they left your app.</p>
-  <div class="phones">
+  <span class="tag a">Option A — Link out</span><span class="tag time">1–2 days</span>
+  <h2>Add a "Chants" tile that opens the website</h2>
+  <p class="lead">Smallest step. A new entry on the home screen opens japachants.siddha.pro inside an in-app browser. Users can browse but the experience feels like they left your app — and the two modes we care about (study / chant) live only on the website with website styling.</p>
 
+  <div class="phones">
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Home</div><div class="subtitle">Welcome back</div></div>
-          <div class="scroll">
-            <div class="home-tile"><div class="tile-ic" style="background:#fef3c7;">🪔</div><div class="tile-txt"><div class="t1">Counter</div><div class="t2">Continue · 42 of 108</div></div></div>
-            <div class="home-tile"><div class="tile-ic" style="background:#fee2e2;">🕉️</div><div class="tile-txt"><div class="t1">Mantras</div><div class="t2">12 mantras</div></div></div>
-            <div class="home-tile"><div class="tile-ic" style="background:#e0e7ff;">📊</div><div class="tile-txt"><div class="t1">Stats</div><div class="t2">21-day streak</div></div></div>
-            <div class="home-tile new"><div class="tile-ic" style="background:#fed7aa;">📖</div><div class="tile-txt"><div class="t1">Chant Library</div><div class="t2">Browse 1,162 chants</div></div></div>
-            <div class="home-tile"><div class="tile-ic" style="background:#d1fae5;">🏆</div><div class="tile-txt"><div class="t1">Awards</div><div class="t2">8 earned</div></div></div>
+          <div class="app-header"><div class="title">Home</div><div class="subtitle">Namaste, Krishi</div></div>
+          <div class="scroll cream" style="padding-top: 8px;">
+            <div class="home-tile" style="margin: 6px 12px; border-radius: 12px; border: 1px solid var(--divider);">
+              <div class="tile-ic" style="background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); color: white;">◯</div>
+              <div><div class="t1">Continue Counter</div><div class="t2">Om Namah Shivaya · 42 / 108</div></div>
+              <span class="chev">›</span>
+            </div>
+            <div class="home-tile" style="margin: 6px 12px; border-radius: 12px; border: 1px solid var(--divider);">
+              <div class="tile-ic" style="background: #fef3c7; color: #b7791f;">🕉️</div>
+              <div><div class="t1">Mantras</div><div class="t2">12 mantras</div></div>
+              <span class="chev">›</span>
+            </div>
+            <div class="home-tile new" style="margin: 6px 12px; border-radius: 12px; border: 1px solid rgba(255,142,0,0.3);">
+              <div class="tile-ic" style="background: linear-gradient(135deg, #fac95f, #ff950f); color: white;">📖</div>
+              <div><div class="t1">Chant Library</div><div class="t2">Browse 1,162 chants</div></div>
+              <span class="new-pill">NEW</span>
+            </div>
+            <div class="home-tile" style="margin: 6px 12px; border-radius: 12px; border: 1px solid var(--divider);">
+              <div class="tile-ic" style="background: #e0e7ff; color: #4338ca;">📊</div>
+              <div><div class="t1">Insights</div><div class="t2">21-day streak</div></div>
+              <span class="chev">›</span>
+            </div>
+          </div>
+          <div class="bottom-tabs">
+            <div class="bt active"><div class="ico">🏠</div>Home</div>
+            <div class="bt"><div class="ico">🕉️</div>Mantras</div>
+            <div class="bt"><div class="ico">◯</div>Counter</div>
+            <div class="bt"><div class="ico">📊</div>Insights</div>
           </div>
         </div>
       </div>
-      <div class="caption">New "Chant Library" tile added.</div>
+      <div class="caption">New "Chant Library" tile on the home screen.</div>
     </div>
 
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="webview-chrome"><span>◀</span><div class="url">japachants.siddha.pro</div><span>⋯</span></div>
-          <div style="padding:20px; font-family:'Inter',sans-serif;">
-            <div style="font-size:11px; color:#999; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">Vaidika Vignanam</div>
-            <div style="font-size:22px; font-weight:700; margin-bottom:4px;">Bhaja Govindam</div>
-            <div style="font-size:12px; color:#888; margin-bottom:20px;">Adi Shankaracharya · Vedanta</div>
-            <div style="font-family:'Noto Serif',serif; font-size:15px; line-height:1.8; color:#8b1e3f;">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।<br/>सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
-            <div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; padding:10px; border:1px solid #eee; border-radius:8px;">
-              <span style="font-size:12px; color:#666;">Counter</span>
-              <span style="font-size:18px; font-weight:700; color:#8b1e3f;">7</span>
-            </div>
+          <div class="app-header has-back"><span class="back">‹</span><div><div class="title">Chant Library</div><div class="subtitle">japachants.siddha.pro</div></div></div>
+          <div class="webview-chrome"><span>◀</span><span>▶</span><div class="u">japachants.siddha.pro/bhaja-govindam</div><span>⋯</span></div>
+          <div style="padding: 24px 20px; background: white; flex: 1; overflow-y: auto;">
+            <div style="font-size: 10px; color: #999; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">Adi Shankaracharya · Vedanta</div>
+            <div style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 18px;">Bhaja Govindam</div>
+            <div style="font-family: 'Noto Serif Devanagari', serif; font-size: 15.5px; line-height: 1.85; color: #8b1e3f;">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।<br/>सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
+            <div style="font-size: 13px; color: #777; font-style: italic; margin-top: 16px;">Worship Govinda. When the appointed time comes, grammar rules will not save you.</div>
           </div>
         </div>
       </div>
-      <div class="caption">Website fonts &amp; buttons inside a mini browser. Counter here ≠ main app counter.</div>
+      <div class="caption">Website inside mini-browser. Visual language doesn't match the app.</div>
     </div>
   </div>
 </section>
 
-<!-- OPTION B -->
+<!-- ========== OPTION B ========== -->
 <section class="option featured" id="b">
-  <span class="tag b">Option B — Native library</span>
-  <span class="tag rec">★ recommended</span>
-  <h2>The mantras screen becomes the real library · 1–2 weeks</h2>
-  <p class="lead">The existing "Mantras" screen is now backed by the full 1,162-chant catalog. Tap a chant and you get a native reading view — Sanskrit, translations, meaning — with your existing native counter ready to launch. One app, feels bigger and richer.</p>
-  <div class="phones">
+  <span class="tag b">Option B — Native chant library</span><span class="tag rec">★ recommended</span><span class="tag time">1–2 weeks</span>
+  <h2>A new "Chants" tab · both modes built native</h2>
+  <p class="lead">Add a fifth tab. Chants live inside the app with the real app's cream/saffron design language. Each chant supports both modes — study (learn) and chant (recite) — and the two modes use the same navigation but feel completely different. One app, one design language, one visit to the library gives users everything.</p>
 
+  <div class="phones">
+    <!-- Phone 1: Chants tab list -->
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Mantras</div><div class="subtitle">1,162 chants · search by deity or title</div></div>
+          <div class="app-header"><div class="title">Chants</div><div class="subtitle">1,162 chants · 25 deities</div></div>
+          <div class="searchbar"><div class="input">🔍 Search by deity or title</div></div>
+          <div class="top-tabs">
+            <div class="tt active">All</div>
+            <div class="tt">Ganesha</div>
+            <div class="tt">Shiva</div>
+            <div class="tt">Devi</div>
+          </div>
           <div class="scroll">
-            <div class="group-header">★ Featured today</div>
-            <div class="list-item"><div class="ic">भ</div><div class="txt"><div class="t1">Bhaja Govindam</div><div class="t2">Vedanta · 31 verses</div></div></div>
             <div class="group-header">Ganesha · 36 chants</div>
-            <div class="list-item"><div class="ic">ग</div><div class="txt"><div class="t1">Ganapati Prarthana Ghanapatham</div><div class="t2">15 verses</div></div></div>
-            <div class="list-item"><div class="ic">ग</div><div class="txt"><div class="t1">Ganesha Pancharatnam</div><div class="t2">6 verses</div></div></div>
+            <div class="mantra-row"><div class="mantra-circle">ग</div><div class="txt"><div class="t1">Ganesha Pancharatnam</div><div class="t2">6 verses · Sanskrit</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle">ग</div><div class="txt"><div class="t1">Ganapati Prarthana Ghanapatham</div><div class="t2">15 verses · Vedic</div></div><span class="chev">›</span></div>
             <div class="group-header">Shiva · 59 chants</div>
-            <div class="list-item"><div class="ic">श</div><div class="txt"><div class="t1">Sri Rudram Namakam</div><div class="t2">44 verses</div></div></div>
-            <div class="list-item"><div class="ic">श</div><div class="txt"><div class="t1">Shiva Tandava Stotram</div><div class="t2">17 verses</div></div></div>
+            <div class="mantra-row"><div class="mantra-circle brown">श</div><div class="txt"><div class="t1">Sri Rudram Namakam</div><div class="t2">44 verses · Vedic</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle brown">श</div><div class="txt"><div class="t1">Shiva Tandava Stotram</div><div class="t2">17 verses · Sanskrit</div></div><span class="chev">›</span></div>
             <div class="group-header">Vishnu · 168 chants</div>
-            <div class="list-item"><div class="ic">वि</div><div class="txt"><div class="t1">Vishnu Sahasranamam</div><div class="t2">108 verses</div></div></div>
+            <div class="mantra-row"><div class="mantra-circle gold">वि</div><div class="txt"><div class="t1">Vishnu Sahasranamam</div><div class="t2">108 verses · Sanskrit</div></div><span class="chev">›</span></div>
+          </div>
+          <div class="bottom-tabs">
+            <div class="bt"><div class="ico">🏠</div>Home</div>
+            <div class="bt"><div class="ico">🕉️</div>Mantras</div>
+            <div class="bt"><div class="ico">◯</div>Counter</div>
+            <div class="bt active"><div class="ico">📖</div>Chants</div>
+            <div class="bt"><div class="ico">📊</div>More</div>
           </div>
         </div>
       </div>
-      <div class="caption">Same native screen, now with 1,162 real chants grouped by deity.</div>
+      <div class="caption">Chants tab · app colors, circular icons, deity groups · familiar row style.</div>
     </div>
 
+    <!-- Phone 2: Study mode -->
     <div>
       <div class="phone">
         <div class="screen">
           <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">◀ Bhaja Govindam</div><div class="subtitle">Adi Shankaracharya · Vedanta</div></div>
+          <div class="app-header has-back">
+            <span class="back">‹</span>
+            <div><div class="title">Bhaja Govindam</div><div class="subtitle">Adi Shankaracharya</div></div>
+            <span style="margin-left:auto; color: var(--saffron); font-size: 18px;">♡</span>
+          </div>
+          <div class="mode-toggle"><div class="seg active">📘 Study</div><div class="seg">✦ Chant</div></div>
+          <div class="lang-switch">
+            <div class="pill active">संस्कृत</div><div class="pill">हिन्दी</div><div class="pill">தமிழ்</div><div class="pill">IAST</div><div class="pill">English</div>
+          </div>
           <div class="chant-reader">
-            <div class="verse sanskrit">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।</div>
-            <div class="verse sanskrit">सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
-            <div class="verse trans">Worship Govinda, worship Govinda,<br/>worship Govinda, O fool!<br/>When the appointed time comes,<br/>grammar rules will not save you.</div>
-            <div class="lang-switch">
-              <button>संस्कृत</button>
-              <button class="active">English</button>
-              <button>हिन्दी</button>
-              <button>தமிழ்</button>
-              <button>IAST</button>
+            <div class="verse-block">
+              <div class="vn">Verse 1</div>
+              <div class="sanskrit">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।<br/>सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
+              <div class="translit">bhaja govindaṃ bhaja govindaṃ…</div>
+              <div class="meaning">Worship Govinda. When the appointed time comes, grammar rules will not save you.</div>
+            </div>
+            <div class="verse-block">
+              <div class="vn">Verse 2</div>
+              <div class="sanskrit">मूढ जहीहि धनागमतृष्णां…</div>
             </div>
           </div>
-          <div class="fab">▶ Start counter with this chant</div>
         </div>
       </div>
-      <div class="caption">Native reading view · tap language to switch · one-tap to counter.</div>
+      <div class="caption"><b>Study mode</b> · all languages · verse-by-verse · meaning below each verse.</div>
     </div>
 
+    <!-- Phone 3: Chant mode -->
     <div>
       <div class="phone">
         <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Counter</div></div>
-          <div class="counter-big">
-            <div class="mala">42</div>
-            <div class="mantra-name">Chanting</div>
-            <div class="mantra-script">Bhaja Govindam</div>
+          <div class="statusbar" style="color:rgba(255,255,255,0.6);"><span>9:41</span><span>••• 🔋</span></div>
+          <div style="background: var(--chant-dark); padding: 10px 16px; flex-shrink: 0;">
+            <div class="mode-toggle" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.1); margin: 0;">
+              <div class="seg" style="color: rgba(255,255,255,0.5);">📘 Study</div>
+              <div class="seg active saffron">✦ Chant</div>
+            </div>
           </div>
-          <div style="text-align:center; padding:0 20px; font-size:12px; color:#888;">भज गोविन्दं भज गोविन्दं…<br/><span style="font-size:11px; color:#aaa;">tap to see full text</span></div>
-          <div class="fab">Tap to count · long-press to undo</div>
+          <div class="chant-mode">
+            <div class="chant-mode-header">
+              <span class="back">‹</span>
+              <div class="lang-pill">संस्कृत</div>
+            </div>
+            <div class="progress">3 / 31</div>
+            <div style="height: 36px;"></div>
+            <div class="big fade-top">भज गोविन्दं भज गोविन्दं<br/>गोविन्दं भज मूढमते ।</div>
+            <div class="big fade-top">सम्प्राप्ते सन्निहिते काले<br/>न हि न हि रक्षति डुकृञ्करणे ॥</div>
+            <div class="big active">मूढ जहीहि धनागमतृष्णां<br/>कुरु सद्बुद्धिं मनसि वितृष्णाम् ।</div>
+            <div class="big">यल्लभसे निजकर्मोपात्तं<br/>वित्तं तेन विनोदय चित्तम् ॥</div>
+            <div class="scroll-hint">swipe or auto-scroll · tap to pause</div>
+          </div>
         </div>
       </div>
-      <div class="caption">Your counter, but now showing the chant text above it.</div>
+      <div class="caption"><b>Chant mode</b> · one script only · big text · dark for early-morning chanting · zero distractions.</div>
     </div>
   </div>
 </section>
 
-<!-- OPTION C -->
+<!-- ========== OPTION C ========== -->
 <section class="option" id="c">
-  <span class="tag c">Option C — Unified account</span>
-  <h2>Same mobile as B · plus the website learns your account · 3–5 weeks</h2>
-  <p class="lead">On your phone, nothing changes from Option B. But now the website has login too. Chant on your laptop at work, pick up the phone on the commute — your count is the same number everywhere.</p>
+  <span class="tag c">Option C — Sync your reading</span><span class="tag time">3–5 weeks</span>
+  <h2>Everything from B · plus favorites, last-read, and preferred mode sync everywhere</h2>
+  <p class="lead">Built on top of B. Your account now remembers which chants you've starred, where you left off, and whether you prefer study or chant mode. Open on phone, laptop, or the japachants website — same starred chants, same position, same mode. The counter sync you already have stays exactly as is.</p>
+
   <div class="phones">
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
+          <div class="app-header"><div class="title">Chants</div><div class="subtitle">Signed in · synced</div></div>
+          <div class="fav-banner">
+            <span class="dot"></span>
+            <div class="text"><b>Continue chanting:</b> Bhaja Govindam · verse 7 · chant mode</div>
+            <span style="color: var(--saffron); font-size: 16px;">›</span>
+          </div>
+          <div class="top-tabs">
+            <div class="tt active">★ Mine</div>
+            <div class="tt">All</div>
+            <div class="tt">History</div>
+          </div>
+          <div class="scroll">
+            <div class="group-header">★ Your favorites · synced</div>
+            <div class="mantra-row"><div class="mantra-circle">भ</div><div class="txt"><div class="t1">Bhaja Govindam</div><div class="t2">✦ chant mode · 2 hours ago · iPhone</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle gold">व</div><div class="txt"><div class="t1">Vishnu Sahasranamam</div><div class="t2">📘 study mode · yesterday · laptop</div></div><span class="chev">›</span></div>
+            <div class="mantra-row"><div class="mantra-circle brown">श</div><div class="txt"><div class="t1">Shiva Tandava Stotram</div><div class="t2">✦ chant mode · 3 days ago · iPhone</div></div><span class="chev">›</span></div>
+          </div>
+          <div class="bottom-tabs">
+            <div class="bt"><div class="ico">🏠</div>Home</div>
+            <div class="bt"><div class="ico">🕉️</div>Mantras</div>
+            <div class="bt"><div class="ico">◯</div>Counter</div>
+            <div class="bt active"><div class="ico">📖</div>Chants</div>
+            <div class="bt"><div class="ico">📊</div>More</div>
+          </div>
+        </div>
+      </div>
+      <div class="caption">Favorites · last mode · last position · device hints.</div>
+    </div>
 
     <div>
       <div class="web-browser">
@@ -568,61 +821,45 @@
           <div class="url">🔒 japachants.siddha.pro</div>
         </div>
         <div class="page">
-          <div class="signed-in">👤 krishi</div>
-          <h3>Japa Chants</h3>
-          <div class="h-sub">Welcome back. Your count is synced with your phone.</div>
-          <div class="counter-row">
-            <div>
-              <div class="lab">Your count today</div>
-              <div class="num">1,458</div>
-            </div>
-            <div style="flex:1; text-align:right; font-size:11px; color:#888;">
-              📱 last updated from iPhone<br/>14 seconds ago
-            </div>
+          <div class="signed">👤 krishi</div>
+          <div class="brand">Japa Chants</div>
+          <div class="welcome">Signed in — your chants sync with the app.</div>
+          <div class="saved-card">
+            <div class="lbl">★ Your favorites</div>
+            <div class="t1">Bhaja Govindam</div>
+            <div class="t2">✦ chant mode · Last on iPhone · verse 7 of 31</div>
           </div>
-          <div class="sync">● Live sync with phone · all devices</div>
+          <div class="saved-card">
+            <div class="t1">Vishnu Sahasranamam</div>
+            <div class="t2">📘 study mode · Last on laptop · verse 34 of 108</div>
+          </div>
+          <div class="sync">● Synced across iPhone, iPad, laptop</div>
         </div>
       </div>
-      <div class="caption">Website now has login. Same count across laptop + phone.</div>
-    </div>
-
-    <div>
-      <div class="phone dark">
-        <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>••• 🔋</span></div>
-          <div class="app-header"><div class="title">Counter</div></div>
-          <div class="counter-big">
-            <div class="mala">1458</div>
-            <div class="mantra-name">Chanting</div>
-            <div class="mantra-script">Bhaja Govindam</div>
-          </div>
-          <div style="text-align:center; font-size:11px; color:#888; padding:0 20px;">💻 5 counts came in from laptop · 2 min ago</div>
-          <div class="fab">Tap to count · long-press to undo</div>
-        </div>
-      </div>
-      <div class="caption">Phone shows a subtle note when counts come in from another device.</div>
+      <div class="caption">Website now has login. Same favorites, mode, and position.</div>
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
+<!-- ========== COMPARE ========== -->
 <section class="compare" id="compare">
   <h2>Side-by-side</h2>
   <table class="compare-tbl">
     <thead>
       <tr>
         <th></th>
-        <th>Chants in the mobile app</th>
-        <th>One counter on phone</th>
-        <th>One counter across phone + web</th>
-        <th>Build time</th>
+        <th>Chants in the app</th>
+        <th>Matches app design</th>
+        <th>Study + Chant modes</th>
+        <th>Sync across devices</th>
+        <th>Build</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Today</td><td class="no">12 names only</td><td class="no">—</td><td class="no">—</td><td>—</td></tr>
-      <tr><td>A. Link out</td><td class="no">Opens website</td><td class="no">Two counters</td><td class="no">—</td><td>1–2 days</td></tr>
-      <tr class="featured"><td>B. Native library ★</td><td class="yes">1,162 native</td><td class="yes">Yes</td><td class="no">Web still separate</td><td>1–2 weeks</td></tr>
-      <tr><td>C. Unified</td><td class="yes">1,162 native</td><td class="yes">Yes</td><td class="yes">Yes</td><td>3–5 weeks</td></tr>
+      <tr><td>Today</td><td class="no">—</td><td>—</td><td class="no">—</td><td class="no">—</td><td>—</td></tr>
+      <tr><td>A. Link out</td><td class="no">Opens website</td><td class="no">Website fonts</td><td>Only on website</td><td class="no">—</td><td>1–2 days</td></tr>
+      <tr class="featured"><td>B. Native library ★</td><td class="yes">1,162 native</td><td class="yes">Yes</td><td class="yes">Both native</td><td class="no">Local only</td><td>1–2 weeks</td></tr>
+      <tr><td>C. Synced</td><td class="yes">1,162 native</td><td class="yes">Yes</td><td class="yes">Both native</td><td class="yes">Phone · tablet · web</td><td>3–5 weeks</td></tr>
     </tbody>
   </table>
 </section>
@@ -630,8 +867,9 @@
 </main>
 
 <footer>
-  <p>Mockup only · represents approximate flows, not final UI.<br/>
-  Live chant data source: <a href="https://japachants.siddha.pro/" target="_blank">japachants.siddha.pro</a></p>
+  <p>Mockup only · represents approximate flows and visual treatment, not final UI.<br/>
+  Design language extracted from the real <a href="https://github.com/Pradeepgman/Japa108-iOS" target="_blank">Japa108-iOS</a> and <a href="https://github.com/Pradeepgman/japa108-android" target="_blank">japa108-android</a> codebases.<br/>
+  Live chant data: <a href="https://japachants.siddha.pro/" target="_blank">japachants.siddha.pro</a></p>
 </footer>
 
 </body>
