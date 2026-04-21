@@ -409,16 +409,16 @@
   }
   .rail-title .see-all { margin-left: auto; font-size: 10px; color: var(--saffron); font-weight: 500; }
 
-  /* ===== BOTTOM NAV ===== */
+  /* ===== BOTTOM NAV (faithful to activity_dashboard.xml) ===== */
   .bottom-nav {
     display: flex; background: var(--white); border-top: 1px solid var(--divider);
-    height: 64px; flex-shrink: 0; position: relative;
+    height: 58px; flex-shrink: 0; position: relative;
   }
   .bottom-nav .nav-item {
     flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 4px; padding: 8px 2px;
+    align-items: center; justify-content: center; gap: 3px; padding: 6px 2px;
   }
-  .bottom-nav .nav-item .ico svg { width: 24px; height: 24px; display: block; }
+  .bottom-nav .nav-item .ico svg { width: 22px; height: 22px; display: block; }
   .bottom-nav .nav-item .ico svg path,
   .bottom-nav .nav-item .ico svg circle,
   .bottom-nav .nav-item .ico svg line { stroke: var(--saffron); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -426,19 +426,19 @@
   .bottom-nav .nav-item.inactive .ico svg circle,
   .bottom-nav .nav-item.inactive .ico svg line { stroke: var(--saffron-dim); }
   .bottom-nav .nav-item .lab {
-    font-size: 11px; font-weight: 300;
+    font-size: 12px; font-weight: 300;
     color: var(--ink-dark); font-family: "Inter", sans-serif;
   }
-  .bottom-nav .nav-item.inactive .lab { color: var(--ink-40); }
-  .bottom-nav .nav-item.active .lab { font-weight: 500; }
+  .bottom-nav .nav-item.inactive .lab { color: rgba(0,0,0,0.5); }
+  .bottom-nav .nav-item.active .lab { color: var(--ink-dark); font-weight: 300; }
   .bottom-nav .start-bubble {
-    position: absolute; left: 50%; top: -16px; transform: translateX(-50%);
-    width: 58px; height: 58px; border-radius: 50%;
+    position: absolute; left: 50%; top: -14px; transform: translateX(-50%);
+    width: 52px; height: 52px; border-radius: 50%;
     background: var(--saffron);
-    box-shadow: 0 6px 18px rgba(255, 142, 0, 0.35), 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 14px rgba(255, 142, 0, 0.32), 0 2px 5px rgba(0,0,0,0.08);
     display: flex; align-items: center; justify-content: center; z-index: 5;
   }
-  .bottom-nav .start-bubble svg { width: 34px; height: 34px; }
+  .bottom-nav .start-bubble svg { width: 30px; height: 30px; }
   .bottom-nav .start-spacer { flex: 1; }
 
   .caption { text-align: center; margin-top: 14px; color: #939393; font-size: 12.5px; max-width: 300px; line-height: 1.5; }
