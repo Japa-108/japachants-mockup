@@ -263,18 +263,31 @@
   .clist { background: white; padding: 4px 0; flex: 1; overflow: hidden; }
   .crow { display: flex; align-items: center; gap: 12px; padding: 10px 16px; }
   .crow .cv {
-    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
     position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--parchment);
+    overflow: hidden;
   }
+  .crow .cv > svg.glyph { width: 24px; height: 24px; position: relative; z-index: 2; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18)); }
   .crow .cv::after {
-    content: ""; position: absolute; inset: 6px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), transparent 70%);
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 30% 28%, rgba(255,255,255,0.55), transparent 60%);
+    z-index: 1;
   }
-  .crow .cv.ganesh  { background: radial-gradient(circle at 35% 35%, #d6efde, #5BA86F 78%); }
-  .crow .cv.lakshmi { background: radial-gradient(circle at 35% 35%, #ffe3c8, #e88f4a 78%); }
-  .crow .cv.shiva   { background: radial-gradient(circle at 35% 35%, #d4e6f5, #6c93b8 78%); }
-  .crow .cv.krishna { background: radial-gradient(circle at 35% 35%, #d4d6f5, #5e6abf 78%); }
-  .crow .cv.devi    { background: radial-gradient(circle at 35% 35%, #f5d4e6, #b85a8a 78%); }
+  /* deity-tinted painted vignettes — inspired by the iOS Mantra/ganesha.png */
+  .crow .cv.ganesh  { background: radial-gradient(circle at 35% 35%, #b6e6c2, #5BA86F 78%); }
+  .crow .cv.lakshmi { background: radial-gradient(circle at 35% 35%, #ffd7b1, #e88f4a 78%); }
+  .crow .cv.shiva   { background: radial-gradient(circle at 35% 35%, #b9d2e8, #5d85ad 78%); }
+  .crow .cv.vishnu  { background: radial-gradient(circle at 35% 35%, #c2cef0, #5e6abf 78%); }
+  .crow .cv.krishna { background: radial-gradient(circle at 35% 35%, #d8c8f0, #6e4bb0 78%); }
+  .crow .cv.devi    { background: radial-gradient(circle at 35% 35%, #f0c5d8, #b85a8a 78%); }
+  .crow .cv.aum     { background: radial-gradient(circle at 35% 35%, #ffd9a8, #d97f3a 78%); }
+  /* same vignette for the recommendation-rail circle */
+  .rec-card .vig { display: flex; align-items: center; justify-content: center; color: var(--parchment); overflow: hidden; }
+  .rec-card .vig > svg.glyph { width: 28px; height: 28px; position: relative; z-index: 2; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18)); }
+  .rec-card .vig.vishnu  { background: radial-gradient(circle at 35% 35%, #c2cef0, #5e6abf 78%); }
+  .rec-card .vig.aum     { background: radial-gradient(circle at 35% 35%, #ffd9a8, #d97f3a 78%); }
   .crow .ct { flex: 1; min-width: 0; }
   .crow .ct .t1 { font-family: "Cormorant Garamond", serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.2;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -381,41 +394,110 @@
   .chant-mode {
     flex: 1; overflow: hidden; position: relative;
     display: flex; flex-direction: column;
+    /* default = devotional theme */
     background: linear-gradient(180deg, var(--marigold-top) 0%, var(--marigold-bot) 100%);
     color: var(--parchment);
   }
+  /* Theme: Light · black-on-white (most readable, default for new users) */
+  .chant-mode.theme-light {
+    background: #ffffff;
+    color: var(--ink);
+  }
+  /* Theme: Sepia · ink on warm paper */
+  .chant-mode.theme-sepia {
+    background: #faf2e0;
+    color: #3a342a;
+  }
+  /* Theme: Night · cream on near-black for low-light japa */
+  .chant-mode.theme-night {
+    background: #14110d;
+    color: var(--parchment);
+  }
+
   .chant-mode .progress {
     display: flex; align-items: center; gap: 8px;
     padding: 4px 18px 12px; flex-shrink: 0;
   }
   .chant-mode .progress .pn {
-    font-size: 10px; font-weight: 700; color: var(--parchment); opacity: 0.85;
+    font-size: 10px; font-weight: 700; opacity: 0.7;
     font-variant-numeric: tabular-nums;
+    color: currentColor;
   }
   .chant-mode .progress .bar {
-    flex: 1; height: 3px; background: rgba(253,246,232,0.22); border-radius: 2px;
+    flex: 1; height: 3px; background: currentColor;
+    opacity: 0.18; border-radius: 2px;
     position: relative; overflow: hidden;
   }
-  .chant-mode .progress .bar .fill {
-    position: absolute; top: 0; left: 0; bottom: 0; width: 28%; background: var(--parchment); border-radius: 2px;
+  .chant-mode .progress .bar-wrap { flex: 1; height: 3px; position: relative; }
+  .chant-mode .progress .bar-wrap .track {
+    position: absolute; inset: 0; background: currentColor; opacity: 0.18; border-radius: 2px;
   }
+  .chant-mode .progress .bar-wrap .fill {
+    position: absolute; top: 0; left: 0; bottom: 0; width: 28%;
+    background: currentColor; opacity: 0.85; border-radius: 2px;
+  }
+  .chant-mode.theme-devotional .progress .bar-wrap .fill,
+  .chant-mode.theme-light .progress .bar-wrap .fill {
+    background: var(--brand);
+    opacity: 1;
+  }
+  .chant-mode.theme-sepia .progress .bar-wrap .fill {
+    background: var(--brand-deep);
+    opacity: 1;
+  }
+  .chant-mode.theme-night .progress .bar-wrap .fill {
+    background: var(--brand);
+    opacity: 1;
+  }
+
   .chant-mode .reader { flex: 1; overflow: hidden; padding: 0 22px; position: relative; }
   .chant-mode .reader .stanza {
     font-family: "Noto Serif Devanagari", serif;
     font-size: 22px; line-height: 2;
-    color: var(--parchment); opacity: 0.55;
+    opacity: 0.42;
     margin-bottom: 26px; font-weight: 500;
     text-align: center;
+    color: currentColor;
   }
   .chant-mode .reader .stanza.active { opacity: 1; font-weight: 600; }
+  .chant-mode.theme-light .reader .stanza.active { color: var(--ink); }
+  .chant-mode.theme-light .reader .stanza.active b,
+  .chant-mode.theme-sepia .reader .stanza.active b { color: var(--brand-deep); font-weight: 600; }
   .chant-mode .footer-cap {
     position: absolute; bottom: 12px; left: 0; right: 0;
     text-align: center;
     font-size: 9.5px; font-weight: 700; letter-spacing: 0.22em;
-    color: var(--parchment); opacity: 0.7;
-    text-transform: uppercase;
+    opacity: 0.55; text-transform: uppercase;
+    color: currentColor;
     pointer-events: none;
   }
+
+  /* Inline theme picker affordance in the chant-mode header */
+  .theme-picker {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 9px; border-radius: 999px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    color: currentColor; opacity: 0.85;
+  }
+  .theme-picker .swatches { display: inline-flex; gap: 3px; }
+  .theme-picker .sw {
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .theme-picker .sw.active {
+    box-shadow: 0 0 0 1.5px currentColor;
+    transform: scale(1.15);
+  }
+  .theme-picker .sw.s-light { background: #ffffff; }
+  .theme-picker .sw.s-sepia { background: #faf2e0; }
+  .theme-picker .sw.s-night { background: #14110d; }
+  .theme-picker .sw.s-devotional { background: #F4A024; }
+  .chant-mode.theme-light .theme-picker,
+  .chant-mode.theme-sepia .theme-picker { border-color: var(--cream-edge); color: var(--ink-muted); }
+  .chant-mode.theme-light .theme-picker .sw,
+  .chant-mode.theme-sepia .theme-picker .sw { border-color: var(--cream-edge); }
 
   /* ===== Chant complete ===== */
   .complete {
@@ -618,6 +700,102 @@
       <path d="M11 4h7v16h-7z"/>
     </g>
   </symbol>
+  <symbol id="ic-palette" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22a10 10 0 1 1 10-10 4 4 0 0 1-4 4h-2.5a2 2 0 0 0-1.6 3.2A2 2 0 0 1 12 22z"/>
+      <circle cx="7.5" cy="11" r="1.2" fill="currentColor"/>
+      <circle cx="9.5" cy="6.5" r="1.2" fill="currentColor"/>
+      <circle cx="14" cy="6" r="1.2" fill="currentColor"/>
+      <circle cx="17.5" cy="9.5" r="1.2" fill="currentColor"/>
+    </g>
+  </symbol>
+
+  <!-- ===== Deity glyphs — relatable single-color silhouettes ===== -->
+  <!-- Ganesha: rounded head + two ears + curled trunk + crown bindi -->
+  <symbol id="d-ganesh" viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <ellipse cx="6.4" cy="11.5" rx="2.2" ry="3.3"/>
+      <ellipse cx="17.6" cy="11.5" rx="2.2" ry="3.3"/>
+      <circle cx="12" cy="11" r="5.4"/>
+      <circle cx="12" cy="5" r="1.1"/>
+    </g>
+    <path d="M12 14.5 Q11 19 14 20 Q16.4 20 16.4 17.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Trishul (Shiva / Devi): three prongs from a horizontal bar with central staff -->
+  <symbol id="d-trishul" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="6" x2="12" y2="21"/>
+      <line x1="7"  y1="9"  x2="7"  y2="3"/>
+      <line x1="17" y1="9"  x2="17" y2="3"/>
+      <line x1="12" y1="9"  x2="12" y2="2"/>
+      <line x1="7"  y1="9"  x2="17" y2="9"/>
+      <circle cx="12" cy="14" r="1" fill="currentColor"/>
+    </g>
+  </symbol>
+
+  <!-- Conch (Vishnu): teardrop with inner curl -->
+  <symbol id="d-conch" viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <path d="M14 3 Q4 7 5 14 Q6 20 13 21 Q19 21 21 17 Q22 13 19 11 Q20 8 14 3 Z"/>
+    </g>
+    <g fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.4" stroke-linecap="round">
+      <path d="M11 17 Q14 18 16 16 Q17 14 15 12 Q13 12 13 14"/>
+    </g>
+  </symbol>
+
+  <!-- Flute (Krishna): bansuri with finger holes -->
+  <symbol id="d-flute" viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <rect x="2" y="13" width="20" height="3" rx="1.5" transform="rotate(-12 12 14.5)"/>
+    </g>
+    <g fill="rgba(0,0,0,0.28)">
+      <circle cx="8" cy="13" r="0.8" transform="rotate(-12 12 14.5)"/>
+      <circle cx="11" cy="13" r="0.8" transform="rotate(-12 12 14.5)"/>
+      <circle cx="14" cy="13" r="0.8" transform="rotate(-12 12 14.5)"/>
+      <circle cx="17" cy="13" r="0.8" transform="rotate(-12 12 14.5)"/>
+    </g>
+  </symbol>
+
+  <!-- Lotus (Lakshmi): 8-petal bloom from above -->
+  <symbol id="d-lotus" viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <ellipse cx="12" cy="6.5"  rx="2.2" ry="4.2"/>
+      <ellipse cx="12" cy="17.5" rx="2.2" ry="4.2"/>
+      <ellipse cx="6.5"  cy="12" rx="4.2" ry="2.2"/>
+      <ellipse cx="17.5" cy="12" rx="4.2" ry="2.2"/>
+      <ellipse cx="8"  cy="8"  rx="1.8" ry="3.8" transform="rotate(-45 8 8)"/>
+      <ellipse cx="16" cy="8"  rx="1.8" ry="3.8" transform="rotate(45 16 8)"/>
+      <ellipse cx="8"  cy="16" rx="1.8" ry="3.8" transform="rotate(45 8 16)"/>
+      <ellipse cx="16" cy="16" rx="1.8" ry="3.8" transform="rotate(-45 16 16)"/>
+      <circle cx="12" cy="12" r="2"/>
+    </g>
+  </symbol>
+
+  <!-- Aum ॐ — Devanagari character as path (universal mantra glyph) -->
+  <symbol id="d-aum" viewBox="0 0 24 24">
+    <text x="12" y="20" text-anchor="middle"
+          font-family="Noto Serif Devanagari, serif"
+          font-size="22" font-weight="700"
+          fill="currentColor">ॐ</text>
+  </symbol>
+
+  <!-- Sun-disc / Devi-Saraswati emblem fallback -->
+  <symbol id="d-sun" viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <circle cx="12" cy="12" r="4.5"/>
+      <g>
+        <rect x="11" y="2"  width="2" height="3.4" rx="1"/>
+        <rect x="11" y="18.6" width="2" height="3.4" rx="1"/>
+        <rect x="2"  y="11" width="3.4" height="2" rx="1"/>
+        <rect x="18.6" y="11" width="3.4" height="2" rx="1"/>
+        <rect x="4.6" y="4.6" width="2" height="3.4" rx="1" transform="rotate(-45 5.6 6.3)"/>
+        <rect x="17.4" y="4.6" width="2" height="3.4" rx="1" transform="rotate(45 18.4 6.3)"/>
+        <rect x="4.6" y="16" width="2" height="3.4" rx="1" transform="rotate(45 5.6 17.7)"/>
+        <rect x="17.4" y="16" width="2" height="3.4" rx="1" transform="rotate(-45 18.4 17.7)"/>
+      </g>
+    </g>
+  </symbol>
 </svg>
 </head>
 <body>
@@ -672,11 +850,11 @@
           <div class="rec-rail">
             <div class="scroll">
               <div class="rec-card">
-                <div class="vig"></div>
+                <div class="vig vishnu"><svg class="glyph"><use href="#d-conch"/></svg></div>
                 <div class="rt"><div class="t1">Bhaja Govindam</div><div class="t2">Adi Shankara · 31 verses</div></div>
               </div>
               <div class="rec-card">
-                <div class="vig lakshmi"></div>
+                <div class="vig lakshmi"><svg class="glyph"><use href="#d-lotus"/></svg></div>
                 <div class="rt"><div class="t1">Sri Suktam</div><div class="t2">Lakshmi · 16 verses</div></div>
               </div>
             </div>
@@ -694,19 +872,19 @@
           </div>
           <div class="clist">
             <div class="crow">
-              <div class="cv ganesh"></div>
+              <div class="cv ganesh"><svg class="glyph"><use href="#d-ganesh"/></svg></div>
               <div class="ct"><div class="t1">Ganesha Atharva Shirsha</div><div class="t2">Sanskrit · 9 min</div></div>
             </div>
             <div class="crow">
-              <div class="cv shiva"></div>
+              <div class="cv shiva"><svg class="glyph"><use href="#d-trishul"/></svg></div>
               <div class="ct"><div class="t1">Shiva Tandava Stotram</div><div class="t2">Sanskrit · 17 verses</div></div>
             </div>
             <div class="crow">
-              <div class="cv krishna"></div>
+              <div class="cv krishna"><svg class="glyph"><use href="#d-flute"/></svg></div>
               <div class="ct"><div class="t1">Madhurashtakam</div><div class="t2">Sanskrit · 8 verses</div></div>
             </div>
             <div class="crow">
-              <div class="cv lakshmi"></div>
+              <div class="cv lakshmi"><svg class="glyph"><use href="#d-lotus"/></svg></div>
               <div class="ct"><div class="t1">Kanakadhara Stotram</div><div class="t2">Sanskrit · 21 verses · <span class="lock">🔒</span></div></div>
             </div>
           </div>
@@ -754,23 +932,23 @@
           <div class="sechead"><div class="h">Most chanted today</div></div>
           <div class="clist">
             <div class="crow">
-              <div class="cv ganesh"></div>
+              <div class="cv ganesh"><svg class="glyph"><use href="#d-ganesh"/></svg></div>
               <div class="ct"><div class="t1">Ganesha Atharva Shirsha</div><div class="t2">Sanskrit · 9 min · 4.2k chanting</div></div>
             </div>
             <div class="crow">
-              <div class="cv krishna"></div>
+              <div class="cv vishnu"><svg class="glyph"><use href="#d-conch"/></svg></div>
               <div class="ct"><div class="t1">Bhaja Govindam</div><div class="t2">Sanskrit · 31 verses · 3.1k chanting</div></div>
             </div>
             <div class="crow">
-              <div class="cv devi"></div>
+              <div class="cv devi"><svg class="glyph"><use href="#d-trishul"/></svg></div>
               <div class="ct"><div class="t1">Mahishasura Mardini Stotram</div><div class="t2">Sanskrit · 21 verses</div></div>
             </div>
             <div class="crow">
-              <div class="cv shiva"></div>
+              <div class="cv shiva"><svg class="glyph"><use href="#d-trishul"/></svg></div>
               <div class="ct"><div class="t1">Lingashtakam</div><div class="t2">Sanskrit · 8 verses</div></div>
             </div>
             <div class="crow">
-              <div class="cv lakshmi"></div>
+              <div class="cv lakshmi"><svg class="glyph"><use href="#d-lotus"/></svg></div>
               <div class="ct"><div class="t1">Kanakadhara Stotram</div><div class="t2">Sanskrit · 21 verses · <span class="lock">🔒</span></div></div>
             </div>
           </div>
@@ -874,25 +1052,109 @@
   </div>
 </section>
 
-<!-- ============ 5. Chant mode ============ -->
+<!-- ============ 5. Chant mode (theme-able) ============ -->
 <section class="flow" id="chant">
   <span class="tag neutral">Mode B · Chant</span>
-  <h2>Full-bleed marigold · the screen becomes the practice</h2>
-  <p class="lead">Sessions in the iPhone app own the full screen — they're a "mode," not a sheet. Chant mode mirrors that: marigold-to-amber gradient end-to-end, parchment cream type, a slim cream progress bar across the top, the active stanza fully opaque while the rest fade back.</p>
+  <h2>Pick a reading theme — Light is the default</h2>
+  <p class="lead">Most people read best on white-on-black or black-on-white, so Chant mode is theme-able. Tap the <b>Aa</b> pill in the header to cycle: Light (default), Sepia, Night, or Devotional. The theme is remembered per-user. The active stanza always lifts to the brand-orange highlight in any theme.</p>
   <div class="phones">
+
+    <!-- Theme: Light (default) -->
+    <div class="phone-card">
+      <div class="phone">
+        <div class="screen" style="background: white;">
+          <div class="statusbar"><span>9:46</span><span>••• 🔋</span></div>
+          <div class="chant-mode theme-light">
+            <div class="dhead" style="background: transparent; border-bottom-color: rgba(0,0,0,0.06);">
+              <div class="back" style="color: var(--ink);"><svg><use href="#ic-back"/></svg></div>
+              <div class="title" style="color: var(--ink);">Bhaja Govindam</div>
+              <div class="theme-picker" title="Reading theme">
+                <span>Aa</span>
+                <span class="swatches">
+                  <span class="sw s-light active"></span>
+                  <span class="sw s-sepia"></span>
+                  <span class="sw s-night"></span>
+                  <span class="sw s-devotional"></span>
+                </span>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="pn">8</span>
+              <div class="bar-wrap"><div class="track"></div><div class="fill"></div></div>
+              <span class="pn">31</span>
+            </div>
+            <div class="reader">
+              <div class="stanza">भज गोविन्दं भज गोविन्दं<br>गोविन्दं भज मूढमते ।</div>
+              <div class="stanza">सम्प्राप्ते सन्निहिते काले<br>न हि रक्षति डुकृञ्करणे ॥</div>
+              <div class="stanza active"><b>मूढ जहीहि धनागम-तृष्णां<br>कुरु सद्बुद्धिं मनसि वितृष्णाम् ।</b></div>
+              <div class="stanza">यल्लभसे निजकर्मोपात्तं<br>वित्तं तेन विनोदय चित्तम् ॥</div>
+            </div>
+            <div class="footer-cap">Swipe up to continue</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption"><b>Light · default.</b> Black-on-white = highest readability for most people. Active stanza gets the brand-orange lift.</p>
+    </div>
+
+    <!-- Theme: Sepia -->
+    <div class="phone-card">
+      <div class="phone">
+        <div class="screen" style="background: #faf2e0;">
+          <div class="statusbar"><span style="color:#3a342a;">9:46</span><span style="color:#3a342a;">••• 🔋</span></div>
+          <div class="chant-mode theme-sepia">
+            <div class="dhead" style="background: transparent; border-bottom-color: rgba(60,40,10,0.10);">
+              <div class="back" style="color: #3a342a;"><svg><use href="#ic-back"/></svg></div>
+              <div class="title" style="color: #3a342a;">Bhaja Govindam</div>
+              <div class="theme-picker">
+                <span>Aa</span>
+                <span class="swatches">
+                  <span class="sw s-light"></span>
+                  <span class="sw s-sepia active"></span>
+                  <span class="sw s-night"></span>
+                  <span class="sw s-devotional"></span>
+                </span>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="pn">8</span>
+              <div class="bar-wrap"><div class="track"></div><div class="fill"></div></div>
+              <span class="pn">31</span>
+            </div>
+            <div class="reader">
+              <div class="stanza">भज गोविन्दं भज गोविन्दं<br>गोविन्दं भज मूढमते ।</div>
+              <div class="stanza">सम्प्राप्ते सन्निहिते काले<br>न हि रक्षति डुकृञ्करणे ॥</div>
+              <div class="stanza active"><b>मूढ जहीहि धनागम-तृष्णां<br>कुरु सद्बुद्धिं मनसि वितृष्णाम् ।</b></div>
+              <div class="stanza">यल्लभसे निजकर्मोपात्तं<br>वित्तं तेन विनोदय चित्तम् ॥</div>
+            </div>
+            <div class="footer-cap">Swipe up to continue</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption"><b>Sepia.</b> Warm paper feel — easier on the eyes for long reading sessions; reduces blue-light at evening.</p>
+    </div>
+
+    <!-- Theme: Devotional (marigold) -->
     <div class="phone-card">
       <div class="phone">
         <div class="screen" style="background: var(--marigold-top);">
           <div class="statusbar"><span style="color:var(--parchment);">9:46</span><span style="color:var(--parchment);">••• 🔋</span></div>
           <div class="chant-mode">
-            <div class="dhead dark">
-              <div class="back"><svg><use href="#ic-back"/></svg></div>
-              <div class="title" style="font-family:'Cormorant Garamond',serif; color:var(--parchment);">Bhaja Govindam</div>
-              <div class="lang">सं</div>
+            <div class="dhead" style="background: transparent; border-bottom: none;">
+              <div class="back" style="color: var(--parchment);"><svg><use href="#ic-back"/></svg></div>
+              <div class="title" style="color: var(--parchment);">Bhaja Govindam</div>
+              <div class="theme-picker" style="color: var(--parchment); border-color: rgba(253,246,232,0.55);">
+                <span>Aa</span>
+                <span class="swatches">
+                  <span class="sw s-light"></span>
+                  <span class="sw s-sepia"></span>
+                  <span class="sw s-night"></span>
+                  <span class="sw s-devotional active"></span>
+                </span>
+              </div>
             </div>
             <div class="progress">
               <span class="pn">8</span>
-              <div class="bar"><div class="fill"></div></div>
+              <div class="bar-wrap"><div class="track"></div><div class="fill" style="background: var(--parchment);"></div></div>
               <span class="pn">31</span>
             </div>
             <div class="reader">
@@ -905,8 +1167,9 @@
           </div>
         </div>
       </div>
-      <p class="caption"><b>Marigold gradient end-to-end</b> matches iPhone Counter session screens. Parchment-cream Devanagari at 1.0 opacity for the active stanza, 0.55 for the rest — eye lands where the mantra is.</p>
+      <p class="caption"><b>Devotional.</b> Marigold gradient end-to-end — full ceremonial feel that mirrors the iPhone Counter session screens.</p>
     </div>
+
   </div>
 </section>
 
